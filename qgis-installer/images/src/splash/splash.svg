@@ -33,13 +33,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="-295.70422"
-     inkscape:cy="304.84042"
+     inkscape:cx="-182.40479"
+     inkscape:cy="283.32662"
      inkscape:document-units="px"
      inkscape:current-layer="g3005"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1015"
+     inkscape:window-width="1366"
+     inkscape:window-height="703"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1">
@@ -70,17 +70,17 @@
       <g
          id="g3005">
         <rect
-           style="fill:#ffffff;fill-opacity:1;stroke:#373536;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#ffffff;fill-opacity:1;stroke:#373536;stroke-width:1.00926244;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            id="rect4312"
-           width="235"
-           height="95"
-           x="-300"
-           y="742.36218"
-           transform="matrix(0.8,0,0,-0.8,244.22517,727.64025)"
-           ry="10.000003"
+           width="188"
+           height="84"
+           x="5.0330482"
+           y="-133.7505"
+           transform="scale(1,-1)"
+           ry="8.8421078"
            inkscape:export-filename="/home/yellow/GIT_NEXTGIS/ngq_compulink/qgis-installer/images/src/splash/splash_cl.png"
-           inkscape:export-xdpi="190.4447"
-           inkscape:export-ydpi="190.4447" />
+           inkscape:export-xdpi="213.33"
+           inkscape:export-ydpi="213.33" />
         <path
            inkscape:connector-curvature="0"
            d="m 216.004,218.278 4.135,0 0,26.131 -4.135,0 0,-26.131 z"
@@ -115,10 +115,10 @@
         </g>
         <g
            id="g4267"
-           transform="translate(5.3363434,3.5850019)"
+           transform="translate(6.3280566,3.5850019)"
            inkscape:export-filename="/home/yellow/GIT_NEXTGIS/ngq_compulink/qgis-installer/images/src/splash/splash_cl.png"
-           inkscape:export-xdpi="190.4447"
-           inkscape:export-ydpi="190.4447">
+           inkscape:export-xdpi="213.33"
+           inkscape:export-ydpi="213.33">
           <path
              inkscape:connector-curvature="0"
              d="m 120.33407,98.083402 4.135,0 0,26.130998 -4.135,0 0,-26.130998 z"
@@ -580,18 +580,18 @@
         <text
            xml:space="preserve"
            style="font-size:6.39999771px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#373536;fill-opacity:1;stroke:none;font-family:Sans"
-           x="8.6233282"
-           y="-77.750534"
+           x="9.6150417"
+           y="-81.750534"
            id="text4286"
            sodipodi:linespacing="125%"
            transform="scale(1.0000004,-0.9999996)"
            inkscape:export-filename="/home/yellow/GIT_NEXTGIS/ngq_compulink/qgis-installer/images/src/splash/splash_cl.png"
-           inkscape:export-xdpi="190.4447"
-           inkscape:export-ydpi="190.4447"><tspan
+           inkscape:export-xdpi="213.33"
+           inkscape:export-ydpi="213.33"><tspan
              sodipodi:role="line"
              id="tspan4288"
-             x="8.6233282"
-             y="-77.750534"
+             x="9.6150417"
+             y="-81.750534"
              style="font-size:8.80000019px;font-weight:bold;fill:#373536;fill-opacity:1;-inkscape-font-specification:Sans Bold">ГИС контроля строительства ВОЛС </tspan></text>
         <flowRoot
            xml:space="preserve"
@@ -603,7 +603,7 @@
                height="29.642857"
                x="-327.85715"
                y="722.00507" /></flowRegion><flowPara
-             id="flowPara4296"></flowPara></flowRoot>        <flowRoot
+             id="flowPara4296" /></flowRoot>        <flowRoot
            xml:space="preserve"
            id="flowRoot4298"
            style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:8px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
@@ -613,7 +613,52 @@
                height="194.28572"
                x="-366.07144"
                y="690.2193" /></flowRegion><flowPara
-             id="flowPara4304"></flowPara></flowRoot>      </g>
+             id="flowPara4304" /></flowRoot>        <flowRoot
+           xml:space="preserve"
+           id="flowRoot3106"
+           style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:8px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+             id="flowRegion3108"><rect
+               id="rect3110"
+               width="51.07143"
+               height="8.5714283"
+               x="-363.57144"
+               y="723.43359" /></flowRegion><flowPara
+             id="flowPara3112"></flowPara></flowRoot>        <flowRoot
+           xml:space="preserve"
+           id="flowRoot3114"
+           style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:8px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+             id="flowRegion3116"><rect
+               id="rect3118"
+               width="289.64285"
+               height="172.5"
+               x="-311.42856"
+               y="718.79077" /></flowRegion><flowPara
+             id="flowPara3120"></flowPara></flowRoot>        <text
+           xml:space="preserve"
+           style="font-size:6.4000001px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#373536;fill-opacity:1;stroke:none;font-family:Sans"
+           x="54.781487"
+           y="-69.750504"
+           id="text3122"
+           sodipodi:linespacing="125%"
+           transform="scale(1,-1)"
+           inkscape:export-filename="/home/yellow/GIT_NEXTGIS/ngq_compulink/qgis-installer/images/src/splash/splash_cl.png"
+           inkscape:export-xdpi="213.33"
+           inkscape:export-ydpi="213.33"><tspan
+             sodipodi:role="line"
+             id="tspan3124"
+             x="54.781487"
+             y="-69.750504">Основано на NextGIS QGIS</tspan></text>
+        <flowRoot
+           xml:space="preserve"
+           id="flowRoot3126"
+           style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:8px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+             id="flowRegion3128"><rect
+               id="rect3130"
+               width="286.42856"
+               height="132.85715"
+               x="-326.78571"
+               y="719.86218" /></flowRegion><flowPara
+             id="flowPara3132"></flowPara></flowRoot>      </g>
     </g>
   </g>
 </svg>
