@@ -23,7 +23,7 @@
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
-import resources_rc
+# import resources_rc
 # Import the code for the dialog
 from compulink_tools_dialog import CompulinkToolsPluginDialog
 import os.path
@@ -95,7 +95,7 @@ class CompulinkToolsPlugin:
         status_tip=None,
         whats_this=None,
         parent=None):
-        """Add a toolbar icon to the InaSAFE toolbar.
+        """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
             path (e.g. ':/plugins/foo/bar.png') or a normal file system path.
@@ -160,7 +160,7 @@ class CompulinkToolsPlugin:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/CompulinkToolsPlugin/icon.png'
+        icon_path = self.plugin_dir + '/icon.png'  # ':/plugins/CompulinkToolsPlugin/icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Compulink tools'),
