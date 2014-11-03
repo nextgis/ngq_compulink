@@ -25,6 +25,9 @@ from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
 # import resources_rc
 # Import the code for the dialog
+import qgis
+from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
+from qgis.gui import QgsMessageBar
 from compulink_tools_dialog import CompulinkToolsPluginDialog
 import os.path
 
@@ -215,7 +218,16 @@ class CompulinkToolsPlugin:
         pass
 
     def add_zouit_layer(self):
-        pass
+        path = os.path.join(self.plugin_dir, 'external_sources/zouit.xml')
+        layer = QgsRasterLayer(path, self.tr('ZOUIT'))
+        if not layer.isValid():
+            self.iface.messageBar().pushMessage(self.tr('Error'),
+                                                self.tr('Layer ZOUIT can\'t be added to the map!'),
+                                                level=QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage('Layer ZOUIT can\'t be added to the map!', QgsMessageLog.CRITICAL)
+        else:
+            QgsMapLayerRegistry.instance().addMapLayer(layer)
+
 
     def settings(self):
         pass
