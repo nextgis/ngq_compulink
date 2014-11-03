@@ -226,6 +226,7 @@ class CompulinkToolsPlugin:
                                                 level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage('Layer ZOUIT can\'t be added to the map!', QgsMessageLog.CRITICAL)
         else:
+            layer.renderer().setOpacity(0.7)
             QgsMapLayerRegistry.instance().addMapLayer(layer)
 
 
