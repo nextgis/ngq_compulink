@@ -157,14 +157,49 @@ class CompulinkToolsPlugin:
 
         return action
 
+    def add_group_separator(self,
+                            add_to_menu=True,
+                            add_to_toolbar=True,
+                            parent=None):
+
+        sep_action = QAction(parent)
+        sep_action.setSeparator(True)
+
+        if add_to_menu:
+            self.iface.addPluginToMenu(self.menu, sep_action)
+
+        if add_to_toolbar:
+            self.toolbar.addAction(sep_action)
+
+        self.actions.append(sep_action)
+
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = self.plugin_dir + '/icon.png'  # ':/plugins/CompulinkToolsPlugin/icon.png'
+        #Tools for NGW communicate
+        icon_path = self.plugin_dir + '/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Compulink tools'),
-            callback=self.run,
+            text=self.tr(u'Add projects layers'),
+            callback=self.add_layers_from_ngw,
+            parent=self.iface.mainWindow())
+
+        #Tools for add external resources
+        self.add_group_separator()
+        icon_path = self.plugin_dir + '/icon.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Add ZOUIT layer'),
+            callback=self.add_zouit_layer,
+            parent=self.iface.mainWindow())
+
+        #Settings
+        self.add_group_separator()
+        icon_path = self.plugin_dir + '/icon.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Settings'),
+            callback=self.settings,
             parent=self.iface.mainWindow())
 
 
@@ -176,6 +211,14 @@ class CompulinkToolsPlugin:
                 action)
             self.iface.removeToolBarIcon(action)
 
+    def add_layers_from_ngw(self):
+        pass
+
+    def add_zouit_layer(self):
+        pass
+
+    def settings(self):
+        pass
 
     def run(self):
         """Run method that performs all the real work"""
