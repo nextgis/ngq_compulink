@@ -25,7 +25,6 @@ from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
 # import resources_rc
 # Import the code for the dialog
-import qgis
 from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
 from qgis.gui import QgsMessageBar
 from compulink_tools_dialog import CompulinkToolsPluginDialog
@@ -67,7 +66,6 @@ class CompulinkToolsPlugin:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Compulink tools')
-        # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'CompulinkToolsPlugin')
         self.toolbar.setObjectName(u'CompulinkToolsPlugin')
 

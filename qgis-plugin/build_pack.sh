@@ -2,7 +2,7 @@
 
 #Build zip packet
 BUILD_DIR=/tmp/build_plugin
-PLUGIN_NAME=ru_geocoder
+PLUGIN_NAME=compulink_tools
 
 #Create if need
 mkdir $BUILD_DIR

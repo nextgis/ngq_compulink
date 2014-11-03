@@ -24,33 +24,33 @@
 
 
 #Add iso code for any locales you want to support here (space separated)
-LOCALES = af
+LOCALES = ru
 
 # translation
 SOURCES = \
-	__init__.py \
-	compulink_tools.py \
-	compulink_tools_dialog.py
+	src/__init__.py \
+	src/compulink_tools.py \
+	src/compulink_tools_dialog.py
 
 PLUGINNAME = CompulinkToolsPlugin
 
 PY_FILES = \
-	compulink_tools.py \
-	compulink_tools_dialog.py \
-	__init__.py
+	src/compulink_tools.py \
+	src/compulink_tools_dialog.py \
+	src/__init__.py
 
-EXTRAS = icon.png metadata.txt
+EXTRAS = src/icon.png src/metadata.txt
 
-COMPILED_RESOURCE_FILES = resources_rc.py
+COMPILED_RESOURCE_FILES = src/resources_rc.py
 
 
 #################################################
 # Normally you would not need to edit below here
 #################################################
 
-HELP = help/build/html
+HELP = src/help/build/html
 
-PLUGIN_UPLOAD = $(c)/plugin_upload.py
+PLUGIN_UPLOAD = $(c)/scripts/plugin_upload.py
 
 QGISDIR=.qgis2
 
@@ -59,7 +59,7 @@ default: compile
 compile: $(COMPILED_RESOURCE_FILES)
 
 %_rc.py : %.qrc
-	pyrcc4 -o $*_rc.py  $<
+	pyrcc4 -o $/src/*_rc.py  $<
 
 %.qm : %.ts
 	lrelease $<
@@ -168,7 +168,7 @@ transclean:
 	@echo "------------------------------------"
 	@echo "Removing compiled translation files."
 	@echo "------------------------------------"
-	rm -f i18n/*.qm
+	rm -f src/i18n/*.qm
 
 clean:
 	@echo
@@ -189,7 +189,7 @@ pylint:
 	@echo "-----------------"
 	@echo "Pylint violations"
 	@echo "-----------------"
-	@pylint --reports=n --rcfile=pylintrc . || true
+	@pylint --reports=n --rcfile=pylintrc ./src || true
 	@echo
 	@echo "----------------------"
 	@echo "If you get a 'no module named qgis.core' error, try sourcing"
