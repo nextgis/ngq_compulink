@@ -27,7 +27,6 @@ from PyQt4.QtGui import QAction, QIcon
 # Import the code for the dialog
 from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
 from qgis.gui import QgsMessageBar
-from compulink_tools_dialog import CompulinkToolsPluginDialog
 import os.path
 from settings_dialog import SettingsDialog
 
@@ -60,9 +59,6 @@ class CompulinkToolsPlugin:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
-
-        # Create the dialog (after translation) and keep reference
-        self.dlg = CompulinkToolsPluginDialog()
 
         # Declare instance attributes
         self.actions = []
