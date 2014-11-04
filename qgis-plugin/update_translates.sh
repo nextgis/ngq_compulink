@@ -3,7 +3,7 @@
 #Update translate files
 
 #Update all files
-pylupdate4 ./src/*.py -ts ./src/i18n/*.ts
+pylupdate4 -noobsolete ./src/*.{py,ui} -ts ./src/i18n/*.ts
 echo "TS files have been updated!"
 
 #Check
