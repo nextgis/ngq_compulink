@@ -29,6 +29,7 @@ from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
 from qgis.gui import QgsMessageBar
 from compulink_tools_dialog import CompulinkToolsPluginDialog
 import os.path
+from settings_dialog import SettingsDialog
 
 
 class CompulinkToolsPlugin:
@@ -219,26 +220,17 @@ class CompulinkToolsPlugin:
         path = os.path.join(self.plugin_dir, 'external_sources/zouit.xml')
         layer = QgsRasterLayer(path, self.tr('ZOUIT'))
         if not layer.isValid():
+            error_message = self.tr('Layer ZOUIT can\'t be added to the map!')
             self.iface.messageBar().pushMessage(self.tr('Error'),
-                                                self.tr('Layer ZOUIT can\'t be added to the map!'),
+                                                error_message,
                                                 level=QgsMessageBar.CRITICAL)
-            QgsMessageLog.logMessage('Layer ZOUIT can\'t be added to the map!', QgsMessageLog.CRITICAL)
+            QgsMessageLog.logMessage(error_message, level=QgsMessageLog.CRITICAL)
         else:
             layer.renderer().setOpacity(0.7)
             QgsMapLayerRegistry.instance().addMapLayer(layer)
 
 
     def settings(self):
-        pass
-
-    def run(self):
-        """Run method that performs all the real work"""
-        # show the dialog
-        self.dlg.show()
-        # Run the dialog event loop
-        result = self.dlg.exec_()
-        # See if OK was pressed
-        if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass
+        sett_dialog = SettingsDialog()
+        sett_dialog.show()
+        result = sett_dialog.exec_()
