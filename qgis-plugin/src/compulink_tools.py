@@ -23,10 +23,12 @@
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
-import resources_rc
+# import resources_rc
 # Import the code for the dialog
-from compulink_tools_dialog import CompulinkToolsPluginDialog
+from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
+from qgis.gui import QgsMessageBar
 import os.path
+from settings_dialog import SettingsDialog
 
 
 class CompulinkToolsPlugin:
@@ -58,13 +60,9 @@ class CompulinkToolsPlugin:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
-        # Create the dialog (after translation) and keep reference
-        self.dlg = CompulinkToolsPluginDialog()
-
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Compulink tools')
-        # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'CompulinkToolsPlugin')
         self.toolbar.setObjectName(u'CompulinkToolsPlugin')
 
@@ -95,7 +93,7 @@ class CompulinkToolsPlugin:
         status_tip=None,
         whats_this=None,
         parent=None):
-        """Add a toolbar icon to the InaSAFE toolbar.
+        """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
             path (e.g. ':/plugins/foo/bar.png') or a normal file system path.
@@ -157,14 +155,49 @@ class CompulinkToolsPlugin:
 
         return action
 
+    def add_group_separator(self,
+                            add_to_menu=True,
+                            add_to_toolbar=True,
+                            parent=None):
+
+        sep_action = QAction(parent)
+        sep_action.setSeparator(True)
+
+        if add_to_menu:
+            self.iface.addPluginToMenu(self.menu, sep_action)
+
+        if add_to_toolbar:
+            self.toolbar.addAction(sep_action)
+
+        self.actions.append(sep_action)
+
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/CompulinkToolsPlugin/icon.png'
+        #Tools for NGW communicate
+        icon_path = self.plugin_dir + '/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Compulink tools'),
-            callback=self.run,
+            text=self.tr(u'Add projects layers'),
+            callback=self.add_layers_from_ngw,
+            parent=self.iface.mainWindow())
+
+        #Tools for add external resources
+        self.add_group_separator()
+        icon_path = self.plugin_dir + '/icon.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Add ZOUIT layer'),
+            callback=self.add_zouit_layer,
+            parent=self.iface.mainWindow())
+
+        #Settings
+        self.add_group_separator()
+        icon_path = self.plugin_dir + '/icon.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Settings'),
+            callback=self.settings,
             parent=self.iface.mainWindow())
 
 
@@ -176,15 +209,24 @@ class CompulinkToolsPlugin:
                 action)
             self.iface.removeToolBarIcon(action)
 
+    def add_layers_from_ngw(self):
+        pass
 
-    def run(self):
-        """Run method that performs all the real work"""
-        # show the dialog
-        self.dlg.show()
-        # Run the dialog event loop
-        result = self.dlg.exec_()
-        # See if OK was pressed
-        if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass
+    def add_zouit_layer(self):
+        path = os.path.join(self.plugin_dir, 'external_sources/zouit.xml')
+        layer = QgsRasterLayer(path, self.tr('ZOUIT'))
+        if not layer.isValid():
+            error_message = self.tr('Layer ZOUIT can\'t be added to the map!')
+            self.iface.messageBar().pushMessage(self.tr('Error'),
+                                                error_message,
+                                                level=QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage(error_message, level=QgsMessageLog.CRITICAL)
+        else:
+            layer.renderer().setOpacity(0.7)
+            QgsMapLayerRegistry.instance().addMapLayer(layer)
+
+
+    def settings(self):
+        sett_dialog = SettingsDialog()
+        sett_dialog.show()
+        result = sett_dialog.exec_()

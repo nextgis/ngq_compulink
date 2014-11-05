@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- CompulinkToolsPluginDialog
+ utils.py
                                  A QGIS plugin
  Compulink QGIS tools
                              -------------------
@@ -21,21 +21,44 @@
  ***************************************************************************/
 """
 
+__author__ = 'NextGIS'
+__date__ = 'October 2014'
+__copyright__ = '(C) 2014, NextGIS'
+
+# This will get replaced with a git SHA1 when you do a git archive
+
+__revision__ = '$Format:%H$'
+
 import os
+import glob
+import uuid
+import tempfile
+import zipfile
 
-from PyQt4 import QtGui, uic
-
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'compulink_tools_dialog_base.ui'))
+from qgis.core import QgsVectorFileWriter
 
 
-class CompulinkToolsPluginDialog(QtGui.QDialog, FORM_CLASS):
-    def __init__(self, parent=None):
-        """Constructor."""
-        super(CompulinkToolsPluginDialog, self).__init__(parent)
-        # Set up the user interface from Designer.
-        # After setupUI you can access any designer object by doing
-        # self.<objectname>, and you can use autoconnect slots - see
-        # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
-        # #widgets-and-dialogs-with-auto-connect
-        self.setupUi(self)
+def tempFileName(suffix):
+    fName = os.path.join(
+        tempfile.gettempdir(), unicode(uuid.uuid4()).replace('-', '') + suffix)
+    return fName
+
+
+def exportToShapeFile(layer):
+    tmp = tempFileName('.shp')
+    QgsVectorFileWriter.writeAsVectorFormat(layer, tmp, 'utf-8', layer.crs())
+    return tmp
+
+
+def compressShapeFile(filePath):
+    tmp = tempFileName('.zip')
+    basePath = os.path.splitext(filePath)[0]
+    baseName = os.path.splitext(os.path.basename(filePath))[0]
+
+    zf = zipfile.ZipFile(tmp, 'w')
+    for i in glob.iglob(basePath + '.*'):
+        ext = os.path.splitext(i)[1]
+        zf.write(i, baseName + ext)
+
+    zf.close()
+    return tmp
