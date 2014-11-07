@@ -114,6 +114,7 @@ Section "-QGIS_CUSTOMIZATION" QGIS_CUSTOMIZATION
     
     SetOutPath "$INSTALL_DIR\bin"
     File /r "${QGIS_RUN_BAT}"
+    File /r "${QGIS_PRE_RUN_BAT}"
     File /r "..\Installer-Files\qgis_preruner.py"
     
     SetOutPath "$INSTALL_DIR"
@@ -179,7 +180,17 @@ NoRebootNecessary:
         SW_SHOWNORMAL \
         "" \
         "Запустить ${PROGRAM_RUN_LNK_NAME}"
-
+        
+    Delete "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\Установить настройки по-умолчанию.lnk"
+    CreateShortCut \
+        "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\Установить настройки по-умолчанию.lnk" \
+        "$INSTALL_DIR\bin\nircmd.exe" 'exec hide "$INSTALL_DIR\bin\${SHORTNAME}_preruner.bat"' \
+        "$INSTALL_DIR\images\${PROGRAM_RUN_LNK_ICO_FILENAME}" \
+        "" \
+        SW_SHOWNORMAL \
+        "" \
+        "Установить настройки по-умолчанию"
+        
     Delete "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\${PROGRAM_UNINSTALL_LNK_NAME}.lnk"
     CreateShortCut \
         "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\${PROGRAM_UNINSTALL_LNK_NAME}.lnk" \
