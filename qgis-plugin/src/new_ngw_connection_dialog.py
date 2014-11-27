@@ -25,9 +25,9 @@
 import os
 from PyQt4 import uic
 from PyQt4.QtGui import QDialog
+from ngw_api.ngw_connection_settings import NGWConnectionSettings
 
 from plugin_settings import PluginSettings
-from ngw_api import NGWConnectionSettings
 
 __author__ = 'NextGIS'
 __date__ = 'October 2014'

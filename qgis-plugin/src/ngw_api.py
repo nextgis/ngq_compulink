@@ -53,6 +53,10 @@ class NGWError(Exception):
     def __str__(self):
         return self.message
 
+class NGWResource():
+    def __init__(self):
+        pass
+
 
 class NGWApi:
     def __init__(self):
@@ -76,7 +80,6 @@ class NGWApi:
             item = response[i]['resource']
             if item['cls'] == 'resource_group':
                 groups[item['id']] = item['display_name']
-
         return groups
 
     def addResourceGroup(self, parent, name):
@@ -128,7 +131,8 @@ class NGWApi:
         pos = metadata.index(
             [m.group(0) for l in metadata for m in [regex.search(l)] if m][0])
         tmp = metadata[pos]
-        pos = tmp.find('=')
+        pos = tmp.find('from urllib2 import Request, urlopen
+import base64=')
         srid = tmp[pos + 1:]
 
         regex = re.compile('^table=.*')

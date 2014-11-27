@@ -28,6 +28,8 @@ from PyQt4.QtGui import QAction, QIcon
 from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
 from qgis.gui import QgsMessageBar
 import os.path
+from ngw_api.ngw_resource_factory import NGWResourceFactory
+from plugin_settings import PluginSettings
 from settings_dialog import SettingsDialog
 
 
@@ -210,7 +212,25 @@ class CompulinkToolsPlugin:
             self.iface.removeToolBarIcon(action)
 
     def add_layers_from_ngw(self):
-        pass
+        import pydevd
+        pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True)
+
+        conn_name = PluginSettings.get_last_connection()
+        if not conn_name:
+            error_message = self.tr('You must configure at least one connection!')
+            self.iface.messageBar().pushMessage(self.tr('WARNING'),
+                                                error_message,
+                                                level=QgsMessageBar.WARNING)
+            QgsMessageLog.logMessage(error_message, level=QgsMessageLog.WARNING)
+            return
+        conn_sett = PluginSettings.get_connection(conn_name)
+
+        rsc_factory = NGWResourceFactory(conn_sett)
+        #get root resource
+        root_rsc = rsc_factory.get_root_resource()
+
+
+
 
     def add_zouit_layer(self):
         path = os.path.join(self.plugin_dir, 'external_sources/zouit.xml')
