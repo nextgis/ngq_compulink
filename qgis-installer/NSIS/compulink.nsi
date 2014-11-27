@@ -1,10 +1,10 @@
 !define PROGRAM_NAME "NextGIS QGIS Compulink" ; для идентификации установленного ПО 
 
-!define PROGRAM_VERSION "0.0.1" ; для идентификации установленного ПО
+!define PROGRAM_VERSION "0.0.2" ; для идентификации установленного ПО
 
 !define PROGRAM_INSTALLER_HEADER "ГИС контроля строительства ВОЛС"
 
-!define PROGRAM_INSTALLER_OUTPUT_FILENAME "d:\builds\NextGIS_QGIS_Compulink_0.0.1"
+!define PROGRAM_INSTALLER_OUTPUT_FILENAME "d:\builds\NextGIS_QGIS_Compulink_0.0.2"
 
 !define PROGRAM_INSTALL_DEFAULT_INSTALL_DIR "c:\NextGIS_QGIS_Compulink"
 
@@ -18,10 +18,11 @@
 !define PROGRAM_RUN_LNK_ICO_FILENAME "qgis.ico"
 
 !define QGIS_RUN_BAT "..\Installer-Files\qgis.bat"
+!define QGIS_PRE_RUN_BAT "..\Installer-Files\qgis_preruner.bat"
 
 !define QGIS_DEFAULT_OPTIONS_PATH "..\src\default_options"
 
-!define PLUGINS "d:\builds\plugins\gdallocationinfo_plugin d:\builds\plugins\openlayers_plugin"
+!define PLUGINS "d:\builds\plugins\gdallocationinfo_plugin d:\builds\plugins\openlayers_plugin d:\builds\plugins\identifyplus d:\builds\plugins\compulink_tools"
 
 !define OSGEO4W_SRC_DIR "d:\\builds\\osgeo4w-env\\"
 !define QGIS_SRC_DIR "c:\\builds\\nextgis-qgis-compulink\\"
