@@ -213,7 +213,7 @@ class CompulinkToolsPlugin:
 
     def add_layers_from_ngw(self):
         import pydevd
-        pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True)
+        pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True, suspend=False)
 
         conn_name = PluginSettings.get_last_connection()
         if not conn_name:
@@ -228,7 +228,7 @@ class CompulinkToolsPlugin:
         rsc_factory = NGWResourceFactory(conn_sett)
         #get root resource
         root_rsc = rsc_factory.get_root_resource()
-
+        pass
 
 
 

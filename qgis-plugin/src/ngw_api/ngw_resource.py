@@ -32,37 +32,34 @@ DICT_TO_OBJ = lambda d: Wrapper(**d)
 
 class NGWResource():
 
-    def __init__(self, ngw_connection, resource_id):
+    # STATIC
+    @classmethod
+    def receive_resource_obj(cls, ngw_con, res_id):
         """
-        Init resource and receive it from server
-        :param ngw_connection: connection to the server
-        :param resource_id: id of the resource
+        :rtype : json obj
         """
-        self._id = resource_id
-        self._conn = ngw_connection
-        self._json = None
-        self._receive_obj()
-        self._construct()
+        return ngw_con.get(RESOURCE_URL(res_id))
 
-    def __init__(self, ngw_resource):
+    @classmethod
+    def receive_resource_children(cls, ngw_con, res_id):
+        return ngw_con.get("%s/?parent=%s" % (COLLECTION_URL, res_id))
+
+    # INSTANCE
+    def __init__(self, resource_factory, resource_json):
         """
-        Init resource from other resource instance
+        Init resource from json representation
         :param ngw_resource: any ngw_resource
         """
-        self._id = ngw_resource._id
-        self._conn = ngw_resource._conn
-        self._json = ngw_resource._json
+        self._res_factory = resource_factory
+        self._json = resource_json
         self._construct()
 
-    def _receive_obj(self):
-        self._json = self._conn.get(RESOURCE_URL(self._id))
-
     def _construct(self):
-        #resource
         """
         Construct resource from self._json
         Can be overridden in a derived class
         """
+        #resource
         self.common = DICT_TO_OBJ(self._json['resource'])
         if self.common.parent:
             self.common.parent = DICT_TO_OBJ(self.common.parent)
@@ -70,3 +67,17 @@ class NGWResource():
             self.common.owner_user = DICT_TO_OBJ(self.common.owner_user)
         #resmeta
         self.metadata = DICT_TO_OBJ(self._json['resmeta'])
+
+    def get_parent(self):
+        if self.common.parent:
+            return self._res_factory.get_resource(self.common.parent.id)
+        else:
+            return None
+
+    def get_children(self):
+        children = []
+        if self.common.children:
+            children_json = NGWResource.receive_resource_children(self._res_factory.connection, self.common.id)
+            for child_json in children_json:
+                children.append(self._res_factory.get_resource_by_json(child_json))
+        return children

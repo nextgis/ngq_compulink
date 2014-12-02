@@ -26,11 +26,27 @@ from ngw_error import NGWError
 class NGWResourceFactory():
 
     def __init__(self, conn_settings):
+        self.__res_types_register = {
+            'resource': NGWResource,
+        }
+        self.__default_type = 'resource'
         self.__conn = NGWConnection(conn_settings)
 
+    @property
+    def resources_types_registry(self):
+        return self.__res_types_register
+
+    @property
+    def connection(self):
+        return self.__conn
+
     def get_resource(self, resource_id):
-        return NGWResource(self.__conn, resource_id)
+        res_json = NGWResource.receive_resource_obj(self.__conn, resource_id)
+        return NGWResource(self, res_json)  # todo
+
+    def get_resource_by_json(self, res_json):
+        return NGWResource(self, res_json)  # todo
 
     def get_root_resource(self):
-        return NGWResource(self.__conn, 0)
-
+        res_json = NGWResource.receive_resource_obj(self.__conn, 0)
+        return NGWResource(self, res_json)  # todo
