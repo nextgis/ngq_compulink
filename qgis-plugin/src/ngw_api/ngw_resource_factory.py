@@ -18,6 +18,9 @@
  *                                                                         *
  ***************************************************************************/
 """
+from ngw_vector_layer import NGWVectorLayer
+from ngw_group_resource import NGWGroupResource
+from ngw_wfs_service import NGWWfsService
 from ngw_resource import NGWResource
 from ngw_connection import NGWConnection
 from ngw_error import NGWError
@@ -28,6 +31,9 @@ class NGWResourceFactory():
     def __init__(self, conn_settings):
         self.__res_types_register = {
             'resource': NGWResource,
+            'wfsserver_service': NGWWfsService,
+            'resource_group': NGWGroupResource,
+            'vector_layer': NGWVectorLayer,
         }
         self.__default_type = 'resource'
         self.__conn = NGWConnection(conn_settings)
@@ -42,11 +48,16 @@ class NGWResourceFactory():
 
     def get_resource(self, resource_id):
         res_json = NGWResource.receive_resource_obj(self.__conn, resource_id)
-        return NGWResource(self, res_json)  # todo
+        if res_json['resource']['cls'] in self.__res_types_register:
+            return self.__res_types_register[res_json['resource']['cls']](self, res_json)
+        else:
+            return self.__res_types_register[self.__default_type](self, res_json)
 
     def get_resource_by_json(self, res_json):
-        return NGWResource(self, res_json)  # todo
+        if res_json['resource']['cls'] in self.__res_types_register:
+            return self.__res_types_register[res_json['resource']['cls']](self, res_json)
+        else:
+            return self.__res_types_register[self.__default_type](self, res_json)
 
     def get_root_resource(self):
-        res_json = NGWResource.receive_resource_obj(self.__conn, 0)
-        return NGWResource(self, res_json)  # todo
+        return self.get_resource(0)
