@@ -69,8 +69,7 @@ class QNGWResourceItem():
         self.__parent = parent
         self.__children = []  # lazy load
         self.__children_loads = False
-
-        print self.data(Qt.DisplayRole), ' created!'  # debug
+        print unicode(self.data(Qt.DisplayRole)), ' created!'  # debug
 
     def parent(self):
         return self.__parent
