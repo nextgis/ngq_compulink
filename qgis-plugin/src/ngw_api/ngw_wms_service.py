@@ -24,6 +24,8 @@ from ngw_resource import NGWResource
 
 class NGWWmsService(NGWResource):
 
+    type_id = 'wmsserver_service'
+
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
 

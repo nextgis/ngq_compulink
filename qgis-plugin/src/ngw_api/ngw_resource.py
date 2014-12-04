@@ -33,6 +33,8 @@ DICT_TO_OBJ = lambda d: Wrapper(**d)
 
 class NGWResource():
 
+    type_id = 'resource'
+
     # STATIC
     @classmethod
     def receive_resource_obj(cls, ngw_con, res_id):

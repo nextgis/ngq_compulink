@@ -24,6 +24,8 @@ from ngw_resource import NGWResource
 
 class NGWGroupResource(NGWResource):
 
+    type_id = 'resource_group'
+
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
 

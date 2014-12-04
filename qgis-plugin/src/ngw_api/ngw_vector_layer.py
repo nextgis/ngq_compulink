@@ -24,6 +24,8 @@ from ngw_resource import NGWResource
 
 class NGWVectorLayer(NGWResource):
 
+    type_id = 'vector_layer'
+
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
 

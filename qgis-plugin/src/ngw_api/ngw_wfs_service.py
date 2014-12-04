@@ -24,6 +24,8 @@ from ngw_resource import NGWResource
 
 class NGWWfsService(NGWResource):
 
+    type_id = 'wfsserver_service'
+
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
 

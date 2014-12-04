@@ -236,7 +236,15 @@ class CompulinkToolsPlugin:
         types_reg[NGWFoclProject.type_id] = NGWFoclProject
         types_reg[NGWSituationPlan.type_id] = NGWSituationPlan
 
-        root_rsc = rsc_factory.get_root_resource()
+        try:
+            root_rsc = rsc_factory.get_root_resource()
+        except Exception, e:
+            error_message = self.tr('Error on fetch resources: ') + e.message
+            self.iface.messageBar().pushMessage(self.tr('ERROR'),
+                                                error_message,
+                                                level=QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage(error_message, level=QgsMessageLog.CRITICAL)
+            return
 
         res_dialog = AddNgwResourceDialog(root_rsc)
         res_dialog.exec_()

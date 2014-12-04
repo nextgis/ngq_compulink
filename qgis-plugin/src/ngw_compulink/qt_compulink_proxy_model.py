@@ -22,6 +22,10 @@
 """
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QSortFilterProxyModel
+from ..ngw_api.ngw_group_resource import NGWGroupResource
+from ngw_focl_proj import NGWFoclProject
+from ngw_focl_struct import NGWFoclStruct
+from ngw_situation_plan import NGWSituationPlan
 
 
 class QCompulinkProxyModel(QSortFilterProxyModel):
@@ -32,4 +36,8 @@ class QCompulinkProxyModel(QSortFilterProxyModel):
     def filterAcceptsRow(self, row, index):
         item = self.sourceModel().index(row, 0, index).internalPointer()
         data = item.data(Qt.UserRole)
-        return data.common.cls in ['resource_group', 'focl_project'] #  TODO: remake!
+        return data.common.cls in [
+            NGWGroupResource.type_id,
+            NGWFoclStruct.type_id,
+            NGWFoclProject.type_id,
+            NGWSituationPlan.type_id]
