@@ -23,7 +23,6 @@ from ngw_group_resource import NGWGroupResource
 from ngw_wfs_service import NGWWfsService
 from ngw_resource import NGWResource
 from ngw_connection import NGWConnection
-from ngw_error import NGWError
 
 
 class NGWResourceFactory():

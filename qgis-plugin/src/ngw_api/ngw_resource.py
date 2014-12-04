@@ -18,6 +18,7 @@
  *                                                                         *
  ***************************************************************************/
 """
+from os import path
 
 RESOURCE_URL = lambda res_id: '/api/resource/%d' % res_id
 COLLECTION_URL = '/api/resource/'
@@ -42,7 +43,11 @@ class NGWResource():
 
     @classmethod
     def receive_resource_children(cls, ngw_con, res_id):
+        """
+        :rtype : json obj
+        """
         return ngw_con.get("%s/?parent=%s" % (COLLECTION_URL, res_id))
+
 
     # INSTANCE
     def __init__(self, resource_factory, resource_json):
@@ -53,6 +58,11 @@ class NGWResource():
         self._res_factory = resource_factory
         self._json = resource_json
         self._construct()
+
+        # presentation part
+        self.icon_path = path.join(path.dirname(__file__), 'icons/resource.svg')
+        self.type_title = 'NGW Resource'
+
 
     def _construct(self):
         """

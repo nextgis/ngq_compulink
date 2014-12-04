@@ -18,8 +18,15 @@
  *                                                                         *
  ***************************************************************************/
 """
+from os import path
 from ngw_resource import NGWResource
 
 
 class NGWVectorLayer(NGWResource):
-    pass
+
+    def __init__(self, resource_factory, resource_json):
+        NGWResource.__init__(self, resource_factory, resource_json)
+
+        # presentation part
+        self.icon_path = path.join(path.dirname(__file__), 'icons/', 'vector_layer.svg')
+        self.type_title = 'NGW Vector Layer'

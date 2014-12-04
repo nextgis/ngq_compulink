@@ -74,7 +74,7 @@ class SettingsDialog(QDialog, FORM_CLASS):
         self.cmbConnections.clear()
         self.cmbConnections.addItems(PluginSettings.get_connection_names())
 
-        last_connection = PluginSettings.get_last_connection()
+        last_connection = PluginSettings.get_last_connection_name()
         idx = self.cmbConnections.findText(last_connection)
         if idx == -1 and self.cmbConnections.count() > 0:
             self.cmbConnections.setCurrentIndex(0)
@@ -89,5 +89,5 @@ class SettingsDialog(QDialog, FORM_CLASS):
             self.btnDelete.setEnabled(True)
 
     def reject(self):
-        PluginSettings.set_last_connection(self.cmbConnections.currentText())
+        PluginSettings.set_last_connection_name(self.cmbConnections.currentText())
         QDialog.reject(self)

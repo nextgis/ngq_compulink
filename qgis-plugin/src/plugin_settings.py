@@ -57,12 +57,12 @@ class PluginSettings():
         settings.setValue(key + '/password', connection_settings.password)
 
     @classmethod
-    def get_last_connection(cls):
+    def get_last_connection_name(cls):
         settings = cls.get_settings()
         return settings.value('/ui/lastConnection', '')
 
     @classmethod
-    def set_last_connection(cls, connection_name):
+    def set_last_connection_name(cls, connection_name):
         settings = cls.get_settings()
         settings.setValue('/ui/lastConnection', connection_name)
 
