@@ -115,3 +115,5 @@ class QNGWResourceItem():
             return QIcon(self.__ngw_resource.icon_path)
         if role == Qt.ToolTipRole:
             return self.__ngw_resource.type_title
+        if role == Qt.UserRole:
+            return self.__ngw_resource

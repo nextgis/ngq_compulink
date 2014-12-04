@@ -30,6 +30,9 @@ from qgis.gui import QgsMessageBar
 import os.path
 from add_ngw_resource_dialog import AddNgwResourceDialog
 from ngw_api.ngw_resource_factory import NGWResourceFactory
+from ngw_compulink.ngw_focl_struct import NGWFoclStruct
+from ngw_compulink.ngw_focl_proj import NGWFoclProject
+from ngw_compulink.ngw_situation_plan import NGWSituationPlan
 from plugin_settings import PluginSettings
 from settings_dialog import SettingsDialog
 
@@ -213,8 +216,8 @@ class CompulinkToolsPlugin:
             self.iface.removeToolBarIcon(action)
 
     def add_layers_from_ngw(self):
-        #import pydevd
-        #pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True, suspend=False)
+        import pydevd
+        pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True, suspend=False)
 
         conn_name = PluginSettings.get_last_connection_name()
         if not conn_name:
@@ -226,7 +229,13 @@ class CompulinkToolsPlugin:
             return
         conn_sett = PluginSettings.get_connection(conn_name)
 
+        #setup ngw api
         rsc_factory = NGWResourceFactory(conn_sett)
+        types_reg = rsc_factory.resources_types_registry
+        types_reg[NGWFoclStruct.type_id] = NGWFoclStruct
+        types_reg[NGWFoclProject.type_id] = NGWFoclProject
+        types_reg[NGWSituationPlan.type_id] = NGWSituationPlan
+
         root_rsc = rsc_factory.get_root_resource()
 
         res_dialog = AddNgwResourceDialog(root_rsc)
