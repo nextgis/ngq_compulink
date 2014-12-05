@@ -25,10 +25,8 @@ from ngw_resource import NGWResource
 class NGWWmsService(NGWResource):
 
     type_id = 'wmsserver_service'
+    icon_path = path.join(path.dirname(__file__), '/icons', 'wms.svg')
+    type_title = 'NGW WMS Service'
 
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
-
-        # presentation part
-        self.icon_path = path.join(path.dirname(__file__), '/icons', 'wms.svg')
-        self.type_title = 'NGW WMS Service'

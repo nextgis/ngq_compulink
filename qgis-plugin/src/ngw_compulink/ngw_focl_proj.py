@@ -25,10 +25,8 @@ from ..ngw_api.ngw_resource import NGWResource
 class NGWFoclProject(NGWResource):
 
     type_id = 'focl_project'
+    icon_path = path.join(path.dirname(__file__), 'icons/', 'focl_proj.png')
+    type_title = 'FOCL Project'
 
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
-
-        # presentation part
-        self.icon_path = path.join(path.dirname(__file__), 'icons/focl_struct.png')
-        self.type_title = 'FOCL Project'

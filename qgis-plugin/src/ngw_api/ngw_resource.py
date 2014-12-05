@@ -34,6 +34,9 @@ DICT_TO_OBJ = lambda d: Wrapper(**d)
 class NGWResource():
 
     type_id = 'resource'
+    icon_path = path.join(path.dirname(__file__), 'icons/', 'resource.svg')
+    type_title = 'NGW Resource'
+
 
     # STATIC
     @classmethod
@@ -60,10 +63,6 @@ class NGWResource():
         self._res_factory = resource_factory
         self._json = resource_json
         self._construct()
-
-        # presentation part
-        self.icon_path = path.join(path.dirname(__file__), 'icons/resource.svg')
-        self.type_title = 'NGW Resource'
 
 
     def _construct(self):

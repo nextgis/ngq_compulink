@@ -25,10 +25,9 @@ from ngw_resource import NGWResource
 class NGWWfsService(NGWResource):
 
     type_id = 'wfsserver_service'
+    icon_path = path.join(path.dirname(__file__), 'icons/', 'wfs.svg')
+    type_title = 'NGW WFS Service'
+
 
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
-
-        # presentation part
-        self.icon_path = path.join(path.dirname(__file__), 'icons/', 'wfs.svg')
-        self.type_title = 'NGW WFS Service'

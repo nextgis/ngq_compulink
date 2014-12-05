@@ -25,11 +25,8 @@ from ..ngw_api.ngw_resource import NGWResource
 class NGWSituationPlan(NGWResource):
 
     type_id = 'situation_plan'
+    icon_path = path.join(path.dirname(__file__), 'icons/', 'sit_plan.png')
+    type_title = 'Situation Plan'
 
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
-
-        # presentation part
-        self.icon_path = path.join(path.dirname(__file__), 'icons/sit_plan.png')
-        self.type_title = 'Situation Plan'
-        self.type_id = 'situation_plan'

@@ -38,7 +38,7 @@ class QNGWCompulinkResourceItem():
         self._parent = parent
         self._children = []  # lazy load
         self._children_loads = False
-        print unicode(self.data(Qt.DisplayRole)), ' created!'  # debug
+        #print unicode(self.data(Qt.DisplayRole)) #, ' created!'  # debug
 
     def parent(self):
         return self._parent
@@ -80,7 +80,8 @@ class QNGWCompulinkResourceItem():
         self._children_loads = True
 
     def has_children(self):
-        return self._ngw_resource.common.children
+        #return self._ngw_resource.common.children
+        return self.get_children_count() > 0
 
     def data(self, role):
         if role == Qt.DisplayRole:

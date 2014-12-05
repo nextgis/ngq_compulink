@@ -25,10 +25,9 @@ from ..ngw_api.ngw_resource import NGWResource
 class NGWFoclStruct(NGWResource):
 
     type_id = 'focl_struct'
+    icon_path = path.join(path.dirname(__file__), 'icons/', 'focl_struct.png')
+    type_title = 'FOCL Structure'
 
     def __init__(self, resource_factory, resource_json):
         NGWResource.__init__(self, resource_factory, resource_json)
 
-        # presentation part
-        self.icon_path = path.join(path.dirname(__file__), 'icons/focl_struct.png')
-        self.type_title = 'FOCL Structure'
