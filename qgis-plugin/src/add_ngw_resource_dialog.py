@@ -24,6 +24,7 @@
 """
 from ngw_api.qt_ngw_resources_model import QNGWResourceItem, QNGWResourcesModel
 from ngw_compulink.qt_compulink_proxy_model import QCompulinkProxyModel
+from ngw_compulink.qt_compulink_resources_model import QNGWCompulinkResourceItem
 
 __author__ = 'NextGIS'
 __date__ = 'October 2014'
@@ -51,11 +52,11 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         self.btnClose.clicked.connect(self.reject)
 
         #model
-        self._root_item = QNGWResourceItem(ngw_root_resource, None)
+        self._root_item = QNGWCompulinkResourceItem(ngw_root_resource, None)
         self._resource_model = QNGWResourcesModel(self._root_item)
-        self._proxy_model = QCompulinkProxyModel()
-        self._proxy_model.setSourceModel(self._resource_model)
-        self.trvResources.setModel(self._proxy_model)
+        #self._proxy_model = QCompulinkProxyModel()
+        #self._proxy_model.setSourceModel(self._resource_model)
+        self.trvResources.setModel(self._resource_model) #(self._proxy_model)
 
 
     def add_resource(self):

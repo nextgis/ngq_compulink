@@ -19,6 +19,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+!!!
+Прокси модель для QNGWResourcesModel из NGW API
+Малая скорость работы: при построении дерева запрашивает два уровня иерархии.
+!!!
 """
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QSortFilterProxyModel
