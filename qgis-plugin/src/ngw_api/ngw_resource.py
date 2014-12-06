@@ -20,15 +20,16 @@
 """
 from os import path
 
-RESOURCE_URL = lambda res_id: '/api/resource/%d' % res_id
-COLLECTION_URL = '/api/resource/'
-
+API_RESOURCE_URL = lambda res_id: '/api/resource/%d' % res_id
+API_COLLECTION_URL = '/api/resource/'
+RESOURCE_URL = lambda res_id: '/resource/%d' % res_id
 
 class Wrapper():
     def __init__(self, **params):
         self.__dict__.update(params)
 
 DICT_TO_OBJ = lambda d: Wrapper(**d)
+LIST_DICT_TO_LIST_OBJ = lambda l: [Wrapper(**el) for el in l]
 
 
 class NGWResource():
@@ -44,14 +45,14 @@ class NGWResource():
         """
         :rtype : json obj
         """
-        return ngw_con.get(RESOURCE_URL(res_id))
+        return ngw_con.get(API_RESOURCE_URL(res_id))
 
     @classmethod
     def receive_resource_children(cls, ngw_con, res_id):
         """
         :rtype : json obj
         """
-        return ngw_con.get("%s/?parent=%s" % (COLLECTION_URL, res_id))
+        return ngw_con.get("%s/?parent=%s" % (API_COLLECTION_URL, res_id))
 
 
     # INSTANCE
@@ -92,3 +93,6 @@ class NGWResource():
             for child_json in children_json:
                 children.append(self._res_factory.get_resource_by_json(child_json))
         return children
+
+    def get_absolute_url(self):
+        return self._res_factory.connection.server_url + RESOURCE_URL(self.common.id)

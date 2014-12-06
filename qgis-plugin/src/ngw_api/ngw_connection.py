@@ -42,6 +42,9 @@ class NGWConnection():
     def set_auth(self, username, password):
         self.__session.auth = (username, password)
 
+    def get_auth(self):
+        return self.__session.auth
+
     def __request(self, url, method, params=None, **kwargs):
         payload = None
         if params:

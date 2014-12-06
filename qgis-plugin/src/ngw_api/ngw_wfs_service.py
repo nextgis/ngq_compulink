@@ -19,7 +19,7 @@
  ***************************************************************************/
 """
 from os import path
-from ngw_resource import NGWResource
+from ngw_resource import NGWResource, DICT_TO_OBJ, LIST_DICT_TO_LIST_OBJ
 
 
 class NGWWfsService(NGWResource):
@@ -28,6 +28,16 @@ class NGWWfsService(NGWResource):
     icon_path = path.join(path.dirname(__file__), 'icons/', 'wfs.svg')
     type_title = 'NGW WFS Service'
 
+    def _construct(self):
+        NGWResource._construct(self)
+        #wfsserver_service
+        self.wfs = DICT_TO_OBJ(self._json['wfsserver_service'])
+        if self.wfs.layers:
+            self.wfs.layers = LIST_DICT_TO_LIST_OBJ(self.wfs.layers)
 
-    def __init__(self, resource_factory, resource_json):
-        NGWResource.__init__(self, resource_factory, resource_json)
+    def get_wfs_url(self, layer_keyname):
+        return '%s%s%s' % (
+            self.get_absolute_url(),
+            '/wfs?SERVICE=WFS&TYPENAME=%s' % layer_keyname,
+            '&username=%s&password=%s' % self._res_factory.connection.get_auth()
+        )

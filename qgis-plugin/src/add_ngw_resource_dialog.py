@@ -22,7 +22,12 @@
  *                                                                         *
  ***************************************************************************/
 """
+from PyQt4.QtCore import Qt
+from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer
+from ngw_api.ngw_wfs_service import NGWWfsService
 from ngw_api.qt_ngw_resources_model import QNGWResourceItem, QNGWResourcesModel
+from ngw_compulink.ngw_focl_struct import NGWFoclStruct
+from ngw_compulink.ngw_situation_plan import NGWSituationPlan
 from ngw_compulink.qt_compulink_proxy_model import QCompulinkProxyModel
 from ngw_compulink.qt_compulink_resources_model import QNGWCompulinkResourceItem
 
@@ -47,10 +52,6 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         super(AddNgwResourceDialog, self).__init__(parent)
         self.setupUi(self)
 
-
-        self.btnAdd.clicked.connect(self.add_resource)
-        self.btnClose.clicked.connect(self.reject)
-
         #model
         self._root_item = QNGWCompulinkResourceItem(ngw_root_resource, None)
         self._resource_model = QNGWResourcesModel(self._root_item)
@@ -58,6 +59,40 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         #self._proxy_model.setSourceModel(self._resource_model)
         self.trvResources.setModel(self._resource_model) #(self._proxy_model)
 
+        self.btnAdd.clicked.connect(self.add_resource)
+        self.btnClose.clicked.connect(self.reject)
+        self.trvResources.selectionModel().currentChanged.connect(self.active_item_chg)
+
+
+    def active_item_chg(self, selected, deselected):
+        ngw_resource = selected.data(Qt.UserRole)
+        if ngw_resource.common.cls in [NGWFoclStruct.type_id, NGWSituationPlan.type_id]:
+            self.btnAdd.setEnabled(True)
+        else:
+            self.btnAdd.setDisabled(True)
+
 
     def add_resource(self):
-        pass
+        sel_index = self.trvResources.selectionModel().currentIndex()
+        if sel_index.isValid():
+            ngw_resource = sel_index.data(Qt.UserRole)
+            children = ngw_resource.get_children()
+            wfs_resources = [ch for ch in children if isinstance(ch, NGWWfsService)]
+            if len(wfs_resources) < 1:
+                #TODO: show error
+                return
+            wfs_resource = wfs_resources[0]
+
+            #Add group
+            toc_root = QgsProject.instance().layerTreeRoot()
+            layers_group = toc_root.insertGroup(0, ngw_resource.common.display_name)
+
+            #Add layers
+            for wfs_layer in wfs_resource.wfs.layers:
+                url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857'
+                qgs_wfs_layer = QgsVectorLayer(url, wfs_layer.display_name, 'WFS')
+                QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
+                layers_group.insertLayer(0, qgs_wfs_layer)
+
+            #QgsMapLayerRegistry.instance().addMapLayer(layer, True)
+            #toc_root.insertLayer(len(toc_root.children()), layer)
