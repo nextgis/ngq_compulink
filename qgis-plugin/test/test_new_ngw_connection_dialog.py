@@ -8,7 +8,7 @@
 
 """
 
-__author__ = 'info@nextgis.org'
+__author__ = 'info@nextgis.com'
 __date__ = '2014-10-31'
 __copyright__ = 'Copyright 2014, NextGIS'
 

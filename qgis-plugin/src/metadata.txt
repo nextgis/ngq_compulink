@@ -12,7 +12,7 @@ qgisMinimumVersion=2.0
 description=Compulink QGIS tools
 version=0.1
 author=NextGIS
-email=info@nextgis.org
+email=info@nextgis.com
 
 # End of mandatory metadata
 
