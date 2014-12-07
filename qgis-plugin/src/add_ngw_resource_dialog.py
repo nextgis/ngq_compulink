@@ -89,10 +89,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
 
             #Add layers
             for wfs_layer in wfs_resource.wfs.layers:
-                url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857'
+                url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857&VERSION=1.0.0&REQUEST=GetFeature'
                 qgs_wfs_layer = QgsVectorLayer(url, wfs_layer.display_name, 'WFS')
                 QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
                 layers_group.insertLayer(0, qgs_wfs_layer)
-
-            #QgsMapLayerRegistry.instance().addMapLayer(layer, True)
-            #toc_root.insertLayer(len(toc_root.children()), layer)
