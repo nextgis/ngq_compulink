@@ -22,15 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import Qt
-from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer
-from ngw_api.ngw_wfs_service import NGWWfsService
-from ngw_api.qt_ngw_resources_model import QNGWResourceItem, QNGWResourcesModel
-from ngw_compulink.ngw_focl_struct import NGWFoclStruct
-from ngw_compulink.ngw_situation_plan import NGWSituationPlan
-from ngw_compulink.qt_compulink_proxy_model import QCompulinkProxyModel
-from ngw_compulink.qt_compulink_resources_model import QNGWCompulinkResourceItem
-
 __author__ = 'NextGIS'
 __date__ = 'October 2014'
 __copyright__ = '(C) 2014, NextGIS'
@@ -38,13 +29,22 @@ __copyright__ = '(C) 2014, NextGIS'
 # This will get replaced with a git SHA1 when you do a git archive
 __revision__ = '$Format:%H$'
 
-import os
+from os import path
+
 from PyQt4 import uic
 from PyQt4.QtGui import QDialog
+from PyQt4.QtCore import Qt
+from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer, QgsMessageLog
+
+from ngw_api.ngw_wfs_service import NGWWfsService
+from ngw_api.qt_ngw_resources_model import QNGWResourcesModel
+from ngw_compulink.ngw_focl_struct import NGWFoclStruct
+from ngw_compulink.ngw_situation_plan import NGWSituationPlan
+from ngw_compulink.qt_compulink_resources_model import QNGWCompulinkResourceItem
 
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'add_ngw_resource_dialog_base.ui'))
+FORM_CLASS, _ = uic.loadUiType(path.join(
+    path.dirname(__file__), 'add_ngw_resource_dialog_base.ui'))
 
 
 class AddNgwResourceDialog(QDialog, FORM_CLASS):
@@ -87,9 +87,19 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             toc_root = QgsProject.instance().layerTreeRoot()
             layers_group = toc_root.insertGroup(0, ngw_resource.common.display_name)
 
+            styles_path = path.join(path.dirname(__file__), 'styles/', ngw_resource.common.cls + '/')
+
             #Add layers
             for wfs_layer in wfs_resource.wfs.layers:
                 url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857&VERSION=1.0.0&REQUEST=GetFeature'
                 qgs_wfs_layer = QgsVectorLayer(url, wfs_layer.display_name, 'WFS')
+
                 QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
                 layers_group.insertLayer(0, qgs_wfs_layer)
+
+                layer_style_path = path.join(styles_path, wfs_layer.keyname + '.qml')
+                if path.isfile(layer_style_path):
+                    qgs_wfs_layer.loadNamedStyle(layer_style_path)
+                else:
+                    message = self.tr('Style for layer "%s" (%s) not found!') % (wfs_layer.display_name,wfs_layer.keyname)
+                    QgsMessageLog.logMessage(message, level=QgsMessageLog.WARNING)
