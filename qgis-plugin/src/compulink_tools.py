@@ -69,7 +69,7 @@ class CompulinkToolsPlugin:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Compulink tools')
-        self.toolbar = self.iface.addToolBar(u'CompulinkToolsPlugin')
+        self.toolbar = self.iface.addToolBar(self.tr(u'&Compulink tools'))
         self.toolbar.setObjectName(u'CompulinkToolsPlugin')
 
     # noinspection PyMethodMayBeStatic

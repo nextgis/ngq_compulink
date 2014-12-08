@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Create base file
+#pylupdate4 -noobsolete ./src/*.{py,ui} -ts ./src/i18n/base.ts
+
+
 #Update translate files
 
 #Update all files
