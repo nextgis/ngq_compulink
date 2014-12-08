@@ -53,8 +53,8 @@ class NewNGWConnectionDialog(QDialog, FORM_CLASS):
         if self.connection_name is not None:
             conn_sett = PluginSettings.get_connection(self.connection_name)
             self.leName.setText(conn_sett.connection_name)
-            self.leUrl.setText(conn_sett.url)
-            self.leUser.setText(conn_sett.user)
+            self.leUrl.setText(conn_sett.server_url)
+            self.leUser.setText(conn_sett.username)
             self.lePassword.setText(conn_sett.password)
 
     def accept(self):
