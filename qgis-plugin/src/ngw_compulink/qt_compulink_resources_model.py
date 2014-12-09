@@ -81,6 +81,11 @@ class QNGWCompulinkResourceItem():
 
     def has_children(self):
         #return self._ngw_resource.common.children
+        if self._ngw_resource.common.cls in [
+                NGWFoclStruct.type_id,
+                NGWSituationPlan.type_id,
+        ]:
+            return False
         return self.get_children_count() > 0
 
     def data(self, role):
