@@ -76,11 +76,12 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         sel_index = self.trvResources.selectionModel().currentIndex()
         if sel_index.isValid():
             ngw_resource = sel_index.data(Qt.UserRole)
-            self._append_resource_to_map(ngw_resource)
+            parent_resource = sel_index.parent().data(Qt.UserRole)
+            self._append_resource_to_map(ngw_resource, parent_resource)
 
 
 
-    def _append_resource_to_map(self, ngw_resource):
+    def _append_resource_to_map(self, ngw_resource, parent_resource):
         children = ngw_resource.get_children()
         wfs_resources = [ch for ch in children if isinstance(ch, NGWWfsService)]
         if len(wfs_resources) < 1:
@@ -91,8 +92,11 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         #Serach/Add group
         toc_root = QgsProject.instance().layerTreeRoot()
 
+        parent_group = toc_root.findGroup(parent_resource.common.display_name)
+        if not parent_group:
+            parent_group = toc_root.insertGroup(0, parent_resource.common.display_name)
 
-        layers_group = toc_root.insertGroup(0, ngw_resource.common.display_name)
+        layers_group = parent_group.insertGroup(0, ngw_resource.common.display_name)
 
         styles_path = path.join(path.dirname(__file__), 'styles/', ngw_resource.common.cls + '/')
 
