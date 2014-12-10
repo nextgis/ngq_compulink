@@ -27,7 +27,7 @@ from PyQt4.QtGui import QAction, QIcon
 # Import the code for the dialog
 from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
 from qgis.gui import QgsMessageBar
-import os.path
+from os import path
 from add_ngw_resource_dialog import AddNgwResourceDialog
 from ngw_api.ngw_resource_factory import NGWResourceFactory
 from ngw_compulink.ngw_focl_struct import NGWFoclStruct
@@ -51,15 +51,15 @@ class CompulinkToolsPlugin:
         # Save reference to the QGIS interface
         self.iface = iface
         # initialize plugin directory
-        self.plugin_dir = os.path.dirname(__file__)
+        self.plugin_dir = path.dirname(__file__)
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
-        locale_path = os.path.join(
+        locale_path = path.join(
             self.plugin_dir,
             'i18n',
             'CompulinkToolsPlugin_{}.qm'.format(locale))
 
-        if os.path.exists(locale_path):
+        if path.exists(locale_path):
             self.translator = QTranslator()
             self.translator.load(locale_path)
 
@@ -251,8 +251,8 @@ class CompulinkToolsPlugin:
 
 
     def add_zouit_layer(self):
-        path = os.path.join(self.plugin_dir, 'external_sources/zouit.xml')
-        layer = QgsRasterLayer(path, self.tr('ZOUIT'))
+        layer_path = path.join(self.plugin_dir, 'external_sources/zouit.xml')
+        layer = QgsRasterLayer(layer_path, self.tr('ZOUIT'))
         if not layer.isValid():
             error_message = self.tr('Layer ZOUIT can\'t be added to the map!')
             self.iface.messageBar().pushMessage(self.tr('Error'),
