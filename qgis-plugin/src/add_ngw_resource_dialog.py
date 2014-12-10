@@ -76,30 +76,37 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         sel_index = self.trvResources.selectionModel().currentIndex()
         if sel_index.isValid():
             ngw_resource = sel_index.data(Qt.UserRole)
-            children = ngw_resource.get_children()
-            wfs_resources = [ch for ch in children if isinstance(ch, NGWWfsService)]
-            if len(wfs_resources) < 1:
-                #TODO: show error
-                return
-            wfs_resource = wfs_resources[0]
+            self._append_resource_to_map(ngw_resource)
 
-            #Add group
-            toc_root = QgsProject.instance().layerTreeRoot()
-            layers_group = toc_root.insertGroup(0, ngw_resource.common.display_name)
 
-            styles_path = path.join(path.dirname(__file__), 'styles/', ngw_resource.common.cls + '/')
 
-            #Add layers
-            for wfs_layer in wfs_resource.wfs.layers:
-                url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857&VERSION=1.0.0&REQUEST=GetFeature'
-                qgs_wfs_layer = QgsVectorLayer(url, wfs_layer.display_name, 'WFS')
+    def _append_resource_to_map(self, ngw_resource):
+        children = ngw_resource.get_children()
+        wfs_resources = [ch for ch in children if isinstance(ch, NGWWfsService)]
+        if len(wfs_resources) < 1:
+            #TODO: show error
+            return
+        wfs_resource = wfs_resources[0]
 
-                QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
-                layers_group.insertLayer(0, qgs_wfs_layer)
+        #Serach/Add group
+        toc_root = QgsProject.instance().layerTreeRoot()
 
-                layer_style_path = path.join(styles_path, wfs_layer.keyname + '.qml')
-                if path.isfile(layer_style_path):
-                    qgs_wfs_layer.loadNamedStyle(layer_style_path)
-                else:
-                    message = self.tr('Style for layer "%s" (%s) not found!') % (wfs_layer.display_name,wfs_layer.keyname)
-                    QgsMessageLog.logMessage(message, level=QgsMessageLog.WARNING)
+
+        layers_group = toc_root.insertGroup(0, ngw_resource.common.display_name)
+
+        styles_path = path.join(path.dirname(__file__), 'styles/', ngw_resource.common.cls + '/')
+
+        #Add layers
+        for wfs_layer in wfs_resource.wfs.layers:
+            url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857&VERSION=1.0.0&REQUEST=GetFeature'
+            qgs_wfs_layer = QgsVectorLayer(url, wfs_layer.display_name, 'WFS')
+
+            QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
+            layers_group.insertLayer(0, qgs_wfs_layer)
+
+            layer_style_path = path.join(styles_path, wfs_layer.keyname + '.qml')
+            if path.isfile(layer_style_path):
+                qgs_wfs_layer.loadNamedStyle(layer_style_path)
+            else:
+                message = self.tr('Style for layer "%s" (%s) not found!') % (wfs_layer.display_name, wfs_layer.keyname)
+                QgsMessageLog.logMessage(message, level=QgsMessageLog.WARNING)

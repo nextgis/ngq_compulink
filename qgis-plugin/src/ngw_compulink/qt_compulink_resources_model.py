@@ -27,44 +27,18 @@ from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QIcon
 
 from ..ngw_api.ngw_group_resource import NGWGroupResource
+from ..ngw_api.qt_ngw_resources_model import QNGWResourceItem
 from ngw_focl_proj import NGWFoclProject
 from ngw_focl_struct import NGWFoclStruct
 from ngw_situation_plan import NGWSituationPlan
 
 
-class QNGWCompulinkResourceItem():
-    def __init__(self, ngw_resource, parent):
-        self._ngw_resource = ngw_resource
-        self._parent = parent
-        self._children = []  # lazy load
-        self._children_loads = False
-        #print unicode(self.data(Qt.DisplayRole)) #, ' created!'  # debug
-
-    def parent(self):
-        return self._parent
-
-    def row(self):
-        if self._parent:
-            return self._parent.get_children().index(self)
-        else:
-            return 0
-
-    def get_children(self):
-        if not self._children_loads:
-            self._load_children()
-        return self._children
-
-    def get_child(self, row):
-        if not self._children_loads:
-            self._load_children()
-        return self._children[row]
-
-    def get_children_count(self):
-        if not self._children_loads:
-            self._load_children()
-        return len(self._children)
+class QNGWCompulinkResourceItem(QNGWResourceItem):
 
     def _load_children(self):
+        '''
+        Собирается дерево только для Групп, Проектов, ВОЛС и Ситуационных планов
+        '''
         resource_children = self._ngw_resource.get_children()
 
         self._children = []
@@ -80,20 +54,12 @@ class QNGWCompulinkResourceItem():
         self._children_loads = True
 
     def has_children(self):
-        #return self._ngw_resource.common.children
+        '''
+        Ниже ВОЛС и СитПланов не уходим
+        '''
         if self._ngw_resource.common.cls in [
                 NGWFoclStruct.type_id,
                 NGWSituationPlan.type_id,
         ]:
             return False
         return self.get_children_count() > 0
-
-    def data(self, role):
-        if role == Qt.DisplayRole:
-            return self._ngw_resource.common.display_name
-        if role == Qt.DecorationRole:
-            return QIcon(self._ngw_resource.icon_path)
-        if role == Qt.ToolTipRole:
-            return self._ngw_resource.type_title
-        if role == Qt.UserRole:
-            return self._ngw_resource
