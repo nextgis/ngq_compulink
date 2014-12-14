@@ -62,4 +62,5 @@ class QNGWCompulinkResourceItem(QNGWResourceItem):
                 NGWSituationPlan.type_id,
         ]:
             return False
-        return self.get_children_count() > 0
+        return self._ngw_resource.common.children  #версия без проверки реальных объектов
+        #return self.get_children_count() > 0
