@@ -25,7 +25,7 @@ from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
 # import resources_rc
 # Import the code for the dialog
-from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog
+from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog, QgsApplication
 from qgis.gui import QgsMessageBar
 from os import path
 from add_ngw_resource_dialog import AddNgwResourceDialog
@@ -72,6 +72,9 @@ class CompulinkToolsPlugin:
         self.toolbar = self.iface.addToolBar(self.tr(u'&Compulink tools'))
         self.toolbar.setObjectName(u'CompulinkToolsPlugin')
 
+        # SETUP ENV
+        self.check_styles_paths()
+
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
@@ -86,7 +89,6 @@ class CompulinkToolsPlugin:
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('CompulinkToolsPlugin', message)
-
 
     def add_action(
         self,
@@ -176,6 +178,16 @@ class CompulinkToolsPlugin:
             self.toolbar.addAction(sep_action)
 
         self.actions.append(sep_action)
+
+    def check_styles_paths(self):
+        plugin_svg_path = path.join(self.plugin_dir, 'svg/')
+        svg_paths = QgsApplication.svgPaths()
+        if not plugin_svg_path in svg_paths:
+            svg_paths.append(plugin_svg_path)
+            QgsApplication.setDefaultSvgPaths(svg_paths)
+
+        for p in QgsApplication.svgPaths():
+            QgsMessageLog.logMessage('SVG PATH: %s' % p, level=QgsMessageLog.INFO)
 
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
