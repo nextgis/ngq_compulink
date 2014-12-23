@@ -200,15 +200,6 @@ class CompulinkToolsPlugin:
             callback=self.add_layers_from_ngw,
             parent=self.iface.mainWindow())
 
-        #Tools for add external resources
-        self.add_group_separator()
-        icon_path = self.plugin_dir + '/icon.png'
-        self.add_action(
-            icon_path,
-            text=self.tr(u'Add ZOUIT layer'),
-            callback=self.add_zouit_layer,
-            parent=self.iface.mainWindow())
-
         #Settings
         self.add_group_separator()
         icon_path = self.plugin_dir + '/icon.png'
@@ -260,21 +251,6 @@ class CompulinkToolsPlugin:
 
         res_dialog = AddNgwResourceDialog(root_rsc)
         res_dialog.exec_()
-
-
-    def add_zouit_layer(self):
-        layer_path = path.join(self.plugin_dir, 'external_sources/zouit.xml')
-        layer = QgsRasterLayer(layer_path, self.tr('ZOUIT'))
-        if not layer.isValid():
-            error_message = self.tr('Layer ZOUIT can\'t be added to the map!')
-            self.iface.messageBar().pushMessage(self.tr('Error'),
-                                                error_message,
-                                                level=QgsMessageBar.CRITICAL)
-            QgsMessageLog.logMessage(error_message, level=QgsMessageLog.CRITICAL)
-        else:
-            layer.renderer().setOpacity(0.7)
-            QgsMapLayerRegistry.instance().addMapLayer(layer)
-
 
     def settings(self):
         sett_dialog = SettingsDialog()
