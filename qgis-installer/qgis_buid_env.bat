@@ -18,6 +18,7 @@ set GRASS_PREFIX=c:\OSGeo4W\apps\grass\grass-6.4.4
 set INCLUDE=%INCLUDE%;%OSGEO4W_ROOT%\include
 set LIB=%LIB%;%OSGEO4W_ROOT%\lib
 
+path %PATH%;%PROGRAMFILES%\NSIS\bin
 path %PATH%;%1
 @cmd
 

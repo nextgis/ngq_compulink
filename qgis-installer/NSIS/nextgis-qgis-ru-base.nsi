@@ -142,6 +142,14 @@ Section "-GDAL" GDAL
     SetOutPath "$INSTALL_DIR\"
 	File /r "${GDAL_SRC_DIR}\*.*"
 SectionEnd
+
+Section "-FONTS" FONTS
+    SetOutPath "$INSTALL_DIR\fonts\"
+	File /r "${FONTS_DIR}\*.*"
+    SetOutPath "$INSTALL_DIR"
+    File /r "..\Installer-Files\install_font.bat"
+    File /r "..\Installer-Files\install_fonts.bat"
+SectionEnd
 ;--------------------------------
 Section "-DONE"
     SetShellVarContext current
@@ -155,12 +163,15 @@ Section "-DONE"
     
     ReadEnvStr $0 COMSPEC
     nsExec::ExecToLog '"$0" /c "$INSTALL_DIR\postinstall.bat"'
-    IfFileExists "$INSTALL_DIR\etc\reboot" RebootNecessary NoRebootNecessary
+    ;IfFileExists "$INSTALL_DIR\etc\reboot" RebootNecessary NoRebootNecessary
+    
+    nsExec::ExecToLog '"$0" /c "$INSTALL_DIR\install_fonts.bat">>fonts_installation.log'
+    SetRebootFlag true
 
-RebootNecessary:
-	SetRebootFlag true
+;RebootNecessary:
+;	SetRebootFlag true
 
-NoRebootNecessary:
+;NoRebootNecessary:
     Delete "$DESKTOP\${PROGRAM_RUN_LNK_NAME}.lnk"
     CreateShortCut \
         "$DESKTOP\${PROGRAM_RUN_LNK_NAME}.lnk" \
@@ -216,8 +227,7 @@ LangString ALREADY_INSTALL_MSG ${LANG_RUSSIAN} "\
     $\n$\nНажмите `OK` для удаления текущей версии и установки ${PROGRAM_RUN_LNK_NAME} (${PROGRAM_VERSION}) или 'Отмена' для выхода."
 
 Function .onInit
-    StrCpy $9 ${c_full}
-    
+   
     !insertmacro MUI_LANGDLL_DISPLAY
     
     Var /GLOBAL uninstaller_path
@@ -251,14 +261,6 @@ Function .onInit
             continue_uninstall:
                 RMDir /r "$installer_path"
     ${EndIf}
-    
-FunctionEnd
-
-Function .onSelChange
-  !insertmacro StartRadioButtons $9
-    !insertmacro RadioButton ${c_full}
-    !insertmacro RadioButton ${c_light}
-  !insertmacro EndRadioButtons
     
 FunctionEnd
 
