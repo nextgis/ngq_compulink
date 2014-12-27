@@ -40,6 +40,7 @@ from ngw_api.ngw_wfs_service import NGWWfsService
 from ngw_api.qt_ngw_resources_model import QNGWResourcesModel
 from ngw_compulink.ngw_focl_struct import NGWFoclStruct
 from ngw_compulink.ngw_situation_plan import NGWSituationPlan
+from ngw_compulink.ngw_focl_proj import NGWFoclProject
 from ngw_compulink.qt_compulink_resources_model import QNGWCompulinkResourceItem
 
 
@@ -66,7 +67,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
 
     def active_item_chg(self, selected, deselected):
         ngw_resource = selected.data(Qt.UserRole)
-        if ngw_resource.common.cls in [NGWFoclStruct.type_id, NGWSituationPlan.type_id]:
+        if ngw_resource.common.cls in [NGWFoclStruct.type_id, NGWSituationPlan.type_id, NGWFoclProject.type_id]:
             self.btnAdd.setEnabled(True)
         else:
             self.btnAdd.setDisabled(True)
@@ -76,8 +77,12 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         sel_index = self.trvResources.selectionModel().currentIndex()
         if sel_index.isValid():
             ngw_resource = sel_index.data(Qt.UserRole)
-            parent_resource = sel_index.parent().data(Qt.UserRole)
-            self._append_resource_to_map(ngw_resource, parent_resource)
+            if ngw_resource.common.cls == NGWFoclProject.type_id:
+                for child in ngw_resource.get_children():
+                    self._append_resource_to_map(child, ngw_resource)
+            else:
+                parent_resource = sel_index.parent().data(Qt.UserRole)
+                self._append_resource_to_map(ngw_resource, parent_resource)
 
 
 
