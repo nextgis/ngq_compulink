@@ -1,10 +1,16 @@
 !define PROGRAM_NAME "NextGIS QGIS Compulink" ; для идентификации установленного ПО 
 
-!define PROGRAM_VERSION "0.0.5" ; для идентификации установленного ПО
+; define by auto build system ======
+;!define PROGRAM_VERSION "0.0.5" ; для идентификации установленного ПО
+; ==================================
 
 !define PROGRAM_INSTALLER_HEADER "ГИС контроля строительства ВОЛС"
 
-!define PROGRAM_INSTALLER_OUTPUT_FILENAME "d:\builds\NextGIS_QGIS_Compulink_0.0.5"
+; define by auto build system ======
+;!define INSTALLER_DST_DIR "./" ; good
+; ==================================
+
+!define PROGRAM_INSTALLER_OUTPUT_FILENAME "${INSTALLER_DST_DIR}\NextGIS_QGIS_Compulink_${PROGRAM_VERSION}"
 
 !define PROGRAM_INSTALL_DEFAULT_INSTALL_DIR "c:\NextGIS_QGIS_Compulink"
 
@@ -22,20 +28,20 @@
 
 !define QGIS_DEFAULT_OPTIONS_PATH "..\interface_settings"
 
-!define PLUGINS "d:\builds\plugins\map_services d:\builds\plugins\openlayers_plugin d:\builds\plugins\identifyplus d:\builds\plugins\compulink_tools"
+!define FONTS_DIR "..\fonts"
 
-!define FONTS_DIR "d:\builds\fonts"
+; define by auto build system ======
+;!define OSGEO4W_SRC_DIR "D:\builds\osgeo4w" ;good
+;!define QGIS_SRC_DIR "D:\builds\nextgis-qgis-release" ;good
+;!define GRASS_SRC_DIR "D:\builds\grass-fromOSGEO4W" ;good
+;!define SAGA_SRC_DIR "D:\builds\saga-fromOSGEO4W" ;good
+;!define GDAL_SRC_DIR "D:\builds\gdal-1.11.0-fromOSGEO4W" ;good
+; ==================================
 
-!define OSGEO4W_SRC_DIR "d:\\builds\\osgeo4w-env____\\"
-!define QGIS_SRC_DIR "d:\\builds\\nextgis-qgis-compulink\\"
-!define GRASS_SRC_DIR "d:\\builds\\grass-fromOSGEO4W\\"
-!define SAGA_SRC_DIR "d:\\builds\\saga-fromOSGEO4W\\"
-!define GDAL_SRC_DIR "d:\\builds\\gdal-2.0.0-dev-with-ags\\"
-
-;!define OSGEO4W_SRC_DIR "d:\\builds\\for_test\\"
-;!define QGIS_SRC_DIR "d:\\builds\\for_test\\"
-;!define GRASS_SRC_DIR "d:\\builds\\for_test\\"
-;!define SAGA_SRC_DIR "d:\\builds\\for_test\\"
-;!define GDAL_SRC_DIR "d:\\builds\\for_test\\"
+; define by auto build system ======
+;!define QGIS_MANUAL_FILE_NAME_RU "QGIS-2.6-UserGuide-ru.pdf"; good
+;!define QGIS_MANUAL_FILE_NAME_EN "QGIS-2.6-UserGuide-en.pdf"; good
+;!define PLUGINS "d:\builds\plugins\map_services d:\builds\plugins\openlayers_plugin d:\builds\plugins\identifyplus d:\builds\plugins\compulink_tools"
+; ==================================
 
 !include "nextgis-qgis-ru-base.nsi"
