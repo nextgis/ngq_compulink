@@ -186,8 +186,6 @@ class CompulinkToolsPlugin:
             svg_paths.append(plugin_svg_path)
             QgsApplication.setDefaultSvgPaths(svg_paths)
 
-        for p in QgsApplication.svgPaths():
-            QgsMessageLog.logMessage('SVG PATH: %s' % p, level=QgsMessageLog.INFO)
 
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
