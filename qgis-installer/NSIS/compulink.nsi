@@ -20,7 +20,7 @@
 
 #!define DEFAULT_PROJECT ""
 
-!define PROGRAM_RUN_LNK_ICO_PATH "..\src\qgis.ico"
+!define PROGRAM_RUN_LNK_ICO_PATH "..\src\files-diff\src\app\qgis.ico"
 !define PROGRAM_RUN_LNK_ICO_FILENAME "qgis.ico"
 
 !define QGIS_RUN_BAT "..\Installer-Files\qgis.bat"
