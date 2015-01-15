@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.7.0-Master" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.6.0-Brighton" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="TextEdit" name="name">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -7,104 +7,195 @@
     <edittype widgetv2type="TextEdit" name="description">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
-    <edittype widgetv2type="ValueMap" name="type_ate">
+    <edittype widgetv2type="ValueMap" name="existing">
       <widgetv2config fieldEditable="1" labelOnTop="0">
-        <value key="Муниципальный район" value="municipal district"/>
-        <value key="Регион" value="region"/>
-        <value key="Федеральный округ" value="federal district"/>
+        <value key="Проектируемый(ая)" value="projected"/>
+        <value key="Существующий(ая)" value="existing"/>
       </widgetv2config>
     </edittype>
+    <edittype widgetv2type="ValueMap" name="laying_method">
+      <widgetv2config fieldEditable="1" labelOnTop="0">
+        <value key="В грунте" value="ground"/>
+        <value key="В здании" value="building"/>
+        <value key="В кабельной канализации" value="canalization"/>
+        <value key="В коллекторе" value="sewer"/>
+        <value key="По ВЛ" value="transmission_towers"/>
+        <value key="По ВЛС" value="air_link"/>
+      </widgetv2config>
+    </edittype>
+    <edittype widgetv2type="UniqueValues" name="owner">
+      <widgetv2config fieldEditable="1" labelOnTop="0" Editable="1"/>
+    </edittype>
   </edittypes>
-  <renderer-v2 attr="type_ate" symbollevels="0" type="categorizedSymbol">
-    <categories>
-      <category render="true" symbol="0" value="federal district" label="Федеральный округ"/>
-      <category render="true" symbol="1" value="region" label="Регион"/>
-      <category render="true" symbol="2" value="municipal district" label="Муниципальный район"/>
-      <category render="true" symbol="3" value="" label="Не определен"/>
-    </categories>
+  <renderer-v2 symbollevels="0" type="RuleRenderer">
+    <rules key="{68f3d3af-296a-4a19-b9c0-837d5c794ef1}">
+      <rule filter=" &quot;existing&quot; = 'projected'" key="{48c596f0-b19f-463b-ae91-ca81dd736694}" label="Проектируемый(ая)">
+        <rule filter=" &quot;laying_method&quot;  = 'ground'" key="{5956df41-ca14-4b9d-ae0b-19d324a539c5}" symbol="0" label="В грунте"/>
+        <rule filter=" &quot;laying_method&quot;  = 'air_link'" key="{e0375df4-b5fa-455b-aaa7-c995e8a8b41e}" symbol="1" label="По ВЛС"/>
+        <rule filter=" &quot;laying_method&quot;  = 'transmission_towers'" key="{76e0d397-3850-4c9d-9c7d-ba5cebc49eb1}" symbol="2" label="По ВЛ"/>
+        <rule filter=" &quot;laying_method&quot;  = 'canalization'" key="{d43b6151-99d3-47b5-9c08-9a947d5a3ba8}" symbol="3" label="В кабельной канализации"/>
+      </rule>
+      <rule filter=" &quot;existing&quot;  = 'existing'" key="{7658b370-6f80-4ad8-a00e-ff0a47f144a8}" label="Существующий(ая)">
+        <rule filter=" &quot;laying_method&quot;  = 'ground'" key="{c2f31819-6dbf-4265-889f-f7173d2d0537}" symbol="4" label="В грунте"/>
+        <rule filter=" &quot;laying_method&quot;  = 'air_link'" key="{9ac4f93a-465d-41dc-9397-27db44b33229}" symbol="5" label="По ВЛС"/>
+        <rule filter=" &quot;laying_method&quot;  = 'transmission_towers'" key="{e864777c-2356-4e44-961f-6b19661ea975}" symbol="6" label="По ВЛ"/>
+        <rule filter=" &quot;laying_method&quot;  = 'canalization'" key="{773d7bc3-733e-49a6-bfd8-d5121acf3577}" symbol="7" label="В кабельной канализации"/>
+      </rule>
+    </rules>
     <symbols>
-      <symbol alpha="1" type="fill" name="0">
-        <layer pass="0" class="SimpleFill" locked="0">
-          <prop k="border_width_map_unit_scale" v="0,0"/>
-          <prop k="color" v="96,173,236,255"/>
+      <symbol alpha="1" type="line" name="0">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="offset" v="0,0"/>
+          <prop k="line_color" v="156,121,0,255"/>
+          <prop k="line_style" v="dash"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="185,0,0,255"/>
-          <prop k="outline_style" v="dash"/>
-          <prop k="outline_width" v="0.8"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="style" v="no"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
         </layer>
       </symbol>
-      <symbol alpha="1" type="fill" name="1">
-        <layer pass="0" class="SimpleFill" locked="0">
-          <prop k="border_width_map_unit_scale" v="0,0"/>
-          <prop k="color" v="96,173,236,255"/>
+      <symbol alpha="1" type="line" name="1">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="offset" v="0,0"/>
+          <prop k="line_color" v="90,219,238,223"/>
+          <prop k="line_style" v="dash"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="185,0,0,255"/>
-          <prop k="outline_style" v="dash dot dot"/>
-          <prop k="outline_width" v="0.6"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="style" v="no"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
         </layer>
       </symbol>
-      <symbol alpha="1" type="fill" name="2">
-        <layer pass="0" class="SimpleFill" locked="0">
-          <prop k="border_width_map_unit_scale" v="0,0"/>
-          <prop k="color" v="96,173,236,255"/>
+      <symbol alpha="1" type="line" name="2">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="offset" v="0,0"/>
+          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_style" v="dash"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="185,0,0,255"/>
-          <prop k="outline_style" v="dash dot"/>
-          <prop k="outline_width" v="0.4"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="style" v="no"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
         </layer>
       </symbol>
-      <symbol alpha="1" type="fill" name="3">
-        <layer pass="0" class="SimpleFill" locked="0">
-          <prop k="border_width_map_unit_scale" v="0,0"/>
-          <prop k="color" v="96,173,236,255"/>
+      <symbol alpha="1" type="line" name="3">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="offset" v="0,0"/>
+          <prop k="line_color" v="255,127,0,255"/>
+          <prop k="line_style" v="dash"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="185,0,0,255"/>
-          <prop k="outline_style" v="dash"/>
-          <prop k="outline_width" v="0.26"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="style" v="no"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="4">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="156,121,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="5">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="90,219,238,223"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="6">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="7">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="255,127,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="-0.8"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
         </layer>
       </symbol>
     </symbols>
-    <source-symbol>
-      <symbol alpha="1" type="fill" name="0">
-        <layer pass="0" class="SimpleFill" locked="0">
-          <prop k="border_width_map_unit_scale" v="0,0"/>
-          <prop k="color" v="96,173,236,255"/>
-          <prop k="joinstyle" v="bevel"/>
-          <prop k="offset" v="0,0"/>
-          <prop k="offset_map_unit_scale" v="0,0"/>
-          <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="185,0,0,255"/>
-          <prop k="outline_style" v="dash"/>
-          <prop k="outline_width" v="0.26"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="style" v="no"/>
-        </layer>
-      </symbol>
-    </source-symbol>
-    <colorramp type="randomcolors" name="[source]"/>
-    <invertedcolorramp value="0"/>
-    <rotation/>
-    <sizescale scalemethod="area"/>
   </renderer-v2>
   <customproperties>
     <property key="labeling" value="pal"/>
@@ -168,8 +259,8 @@
     <property key="labeling/namedStyle" value="Обычный"/>
     <property key="labeling/obstacle" value="true"/>
     <property key="labeling/placeDirectionSymbol" value="0"/>
-    <property key="labeling/placement" value="1"/>
-    <property key="labeling/placementFlags" value="0"/>
+    <property key="labeling/placement" value="2"/>
+    <property key="labeling/placementFlags" value="10"/>
     <property key="labeling/plussign" value="false"/>
     <property key="labeling/preserveRotation" value="true"/>
     <property key="labeling/previewBkgrdColor" value="#ffffff"/>
@@ -274,15 +365,17 @@
     <multilineenabled fieldname="" on=""/>
     <selectedonly on=""/>
   </labelattributes>
-  <editform>.</editform>
+  <editform></editform>
   <editforminit></editforminit>
   <featformsuppress>0</featformsuppress>
-  <annotationform>.</annotationform>
+  <annotationform></annotationform>
   <editorlayout>generatedlayout</editorlayout>
   <aliases>
     <alias field="description" index="1" name="Описание"/>
+    <alias field="existing" index="2" name="Статус объекта"/>
+    <alias field="laying_method" index="3" name="Способ прокладки"/>
     <alias field="name" index="0" name="Наименование"/>
-    <alias field="type_ate" index="2" name="Вид АТЕ"/>
+    <alias field="owner" index="4" name="Собственник"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>

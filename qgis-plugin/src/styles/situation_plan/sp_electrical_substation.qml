@@ -7,31 +7,40 @@
     <edittype widgetv2type="TextEdit" name="description">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
-    <edittype widgetv2type="ValueMap" name="existing">
+    <edittype widgetv2type="ValueMap" name="voltage_values">
       <widgetv2config fieldEditable="1" labelOnTop="0">
-        <value key="Проектируемый(ая)" value="projected"/>
-        <value key="Существующий(ая)" value="existing"/>
+        <value key="10(6)/0,4 кВ" value="10/0.4"/>
+        <value key="110/35 кВ" value="110/35"/>
+        <value key="110/35/10(6) кВ" value="110/35/10"/>
+        <value key="35/0,4 кВ" value="35/0.4"/>
+        <value key="35/10(6) кВ" value="35/10"/>
       </widgetv2config>
     </edittype>
+    <edittype widgetv2type="UniqueValues" name="owner">
+      <widgetv2config fieldEditable="1" labelOnTop="0" Editable="1"/>
+    </edittype>
   </edittypes>
-  <renderer-v2 attr="existing" symbollevels="0" type="categorizedSymbol">
+  <renderer-v2 attr="voltage_values" symbollevels="0" type="categorizedSymbol">
     <categories>
-      <category render="true" symbol="0" value="existing" label="Существующая"/>
-      <category render="true" symbol="1" value="projected" label="Проектируемая"/>
-      <category render="true" symbol="2" value="" label="Не определен"/>
+      <category render="true" symbol="0" value="110/35/10" label="110/35/10(6) кВ"/>
+      <category render="true" symbol="1" value="110/35" label="110/35 кВ"/>
+      <category render="true" symbol="2" value="35/10" label="35/10(6) кВ"/>
+      <category render="true" symbol="3" value="35/0.4" label="35/0,4 кВ"/>
+      <category render="true" symbol="4" value="10/0.4" label="10(6)/0,4 кВ"/>
+      <category render="true" symbol="5" value="" label="Не определено"/>
     </categories>
     <symbols>
       <symbol alpha="1" type="marker" name="0">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="0,0,0,255"/>
+          <prop k="color" v="255,0,0,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="circle"/>
+          <prop k="name" v="rectangle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
           <prop k="outline_color" v="0,0,0,255"/>
-          <prop k="outline_style" v="solid"/>
+          <prop k="outline_style" v="no"/>
           <prop k="outline_width" v="0"/>
           <prop k="outline_width_map_unit_scale" v="0,0"/>
           <prop k="outline_width_unit" v="MM"/>
@@ -45,14 +54,14 @@
       <symbol alpha="1" type="marker" name="1">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="0,0,0,255"/>
+          <prop k="color" v="255,0,0,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="circle"/>
+          <prop k="name" v="rectangle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
           <prop k="outline_color" v="0,0,0,255"/>
-          <prop k="outline_style" v="solid"/>
+          <prop k="outline_style" v="no"/>
           <prop k="outline_width" v="0"/>
           <prop k="outline_width_map_unit_scale" v="0,0"/>
           <prop k="outline_width_unit" v="MM"/>
@@ -66,15 +75,78 @@
       <symbol alpha="1" type="marker" name="2">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="0,0,0,255"/>
+          <prop k="color" v="0,0,255,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="circle"/>
+          <prop k="name" v="rectangle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="no"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="3">
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="0,0,255,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="rectangle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="no"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="4">
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="191,0,255,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="rectangle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="no"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="5">
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="255,255,255,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="rectangle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
           <prop k="outline_color" v="0,0,0,255"/>
           <prop k="outline_style" v="solid"/>
-          <prop k="outline_width" v="0"/>
+          <prop k="outline_width" v="0.2"/>
           <prop k="outline_width_map_unit_scale" v="0,0"/>
           <prop k="outline_width_unit" v="MM"/>
           <prop k="scale_method" v="area"/>
@@ -89,14 +161,14 @@
       <symbol alpha="1" type="marker" name="0">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="0,0,0,255"/>
+          <prop k="color" v="26,59,180,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="circle"/>
+          <prop k="name" v="rectangle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
           <prop k="outline_color" v="0,0,0,255"/>
-          <prop k="outline_style" v="solid"/>
+          <prop k="outline_style" v="no"/>
           <prop k="outline_width" v="0"/>
           <prop k="outline_width_map_unit_scale" v="0,0"/>
           <prop k="outline_width_unit" v="MM"/>
@@ -131,9 +203,10 @@
     <property key="labeling/bufferTransp" value="0"/>
     <property key="labeling/centroidInside" value="false"/>
     <property key="labeling/centroidWhole" value="false"/>
+    <property key="labeling/dataDefined/Color" value="1~~1~~CASE &#xa;WHEN  &quot;voltage_values&quot; =  '110/35'  THEN  color_rgb( 255, 0, 0 ) &#xa;WHEN  &quot;voltage_values&quot; =  '110/35/10'  THEN  color_rgb( 255, 0, 0 )&#xa;WHEN  &quot;voltage_values&quot; =  '35/10'  THEN  color_rgb( 0, 0, 255 ) &#xa;WHEN  &quot;voltage_values&quot; =  '35/0.4'  THEN  color_rgb( 0, 0, 255 ) &#xa;WHEN  &quot;voltage_values&quot; =  '10/0.4'  THEN  color_rgb( 191, 0, 255 ) &#xa;ELSE  color_rgb( 0, 0, 0 )&#xa;END~~"/>
     <property key="labeling/decimals" value="3"/>
     <property key="labeling/displayAll" value="false"/>
-    <property key="labeling/dist" value="2"/>
+    <property key="labeling/dist" value="4"/>
     <property key="labeling/distInMapUnits" value="false"/>
     <property key="labeling/distMapUnitMaxScale" value="0"/>
     <property key="labeling/distMapUnitMinScale" value="0"/>
@@ -257,7 +330,7 @@
   <blendMode>0</blendMode>
   <featureBlendMode>0</featureBlendMode>
   <layerTransparency>0</layerTransparency>
-  <displayfield>name</displayfield>
+  <displayfield>id</displayfield>
   <label>0</label>
   <labelattributes>
     <label fieldname="" text="Подпись"/>
@@ -279,15 +352,16 @@
     <multilineenabled fieldname="" on=""/>
     <selectedonly on=""/>
   </labelattributes>
-  <editform>.</editform>
+  <editform></editform>
   <editforminit></editforminit>
   <featformsuppress>0</featformsuppress>
-  <annotationform>.</annotationform>
+  <annotationform></annotationform>
   <editorlayout>generatedlayout</editorlayout>
   <aliases>
     <alias field="description" index="1" name="Описание"/>
-    <alias field="existing" index="2" name="Статус объекта"/>
     <alias field="name" index="0" name="Наименование"/>
+    <alias field="owner" index="3" name="Собственник"/>
+    <alias field="voltage_values" index="2" name="Напряжения подстанции"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
