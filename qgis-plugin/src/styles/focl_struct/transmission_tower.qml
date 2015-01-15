@@ -1,66 +1,51 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.6.0-Brighton" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.6.0-Brighton" minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="TextEdit" name="name">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
-    <edittype widgetv2type="ValueMap" name="type_optical_cross">
-      <widgetv2config fieldEditable="1" labelOnTop="0"/>
-    </edittype>
-    <edittype widgetv2type="ValueMap" name="status_built">
+    <edittype widgetv2type="ValueMap" name="type_tower">
       <widgetv2config fieldEditable="1" labelOnTop="0">
-        <value key="Построен" value="built"/>
-        <value key="Проект" value="project"/>
+        <value key="Анкерная" value="anchor"/>
+        <value key="Концевая" value="end"/>
+        <value key="Отпаечная" value="solder"/>
+        <value key="Портальная" value="portal"/>
+        <value key="Промежуточная" value="transitional"/>
+        <value key="Транспозиционная" value="transpositional"/>
       </widgetv2config>
     </edittype>
-    <edittype widgetv2type="Hidden" name="status_built_ch">
-      <widgetv2config fieldEditable="0" labelOnTop="0"/>
-    </edittype>
-    <edittype widgetv2type="ValueMap" name="status_check">
+    <edittype widgetv2type="ValueMap" name="voltage">
       <widgetv2config fieldEditable="1" labelOnTop="0">
-        <value key="Не проверен" value="not_checked"/>
-        <value key="Проверен" value="checked"/>
+        <value key="0,4 кВ" value="0.4"/>
+        <value key="110 кВ" value="110"/>
+        <value key="35 кВ" value="35"/>
+        <value key="6-10 кВ" value="6-10"/>
       </widgetv2config>
     </edittype>
-    <edittype widgetv2type="Hidden" name="status_check_ch">
-      <widgetv2config fieldEditable="0" labelOnTop="0"/>
+    <edittype widgetv2type="TextEdit" name="owner">
+      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
     <edittype widgetv2type="TextEdit" name="description">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
   </edittypes>
-  <renderer-v2 attr="status_built" symbollevels="0" type="categorizedSymbol">
+  <renderer-v2 attr="type_tower" symbollevels="0" type="categorizedSymbol">
     <categories>
-      <category render="true" symbol="0" value="built" label="Построен"/>
-      <category render="true" symbol="1" value="project" label="Проект"/>
-      <category render="true" symbol="2" value="" label="Не определен"/>
+      <category render="true" symbol="0" value="anchor" label="Анкерная"/>
+      <category render="true" symbol="1" value="end" label="Концевая"/>
+      <category render="true" symbol="2" value="portal" label="Портальная"/>
+      <category render="true" symbol="3" value="solder" label="Отпаечная"/>
+      <category render="true" symbol="4" value="transitional" label="Промежуточная"/>
+      <category render="true" symbol="5" value="transpositional" label="Транспозиционная"/>
+      <category render="true" symbol="6" value="" label="Не определен"/>
     </categories>
     <symbols>
       <symbol alpha="1" type="marker" name="0">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="51,160,44,255"/>
-          <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="rectangle"/>
-          <prop k="offset" v="0,0"/>
-          <prop k="offset_map_unit_scale" v="0,0"/>
-          <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="51,160,44,255"/>
-          <prop k="outline_style" v="solid"/>
-          <prop k="outline_width" v="0"/>
-          <prop k="outline_width_map_unit_scale" v="0,0"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="scale_method" v="area"/>
-          <prop k="size" v="7"/>
-          <prop k="size_map_unit_scale" v="0,0"/>
-          <prop k="size_unit" v="MM"/>
-          <prop k="vertical_anchor_point" v="1"/>
-        </layer>
-        <layer pass="0" class="SimpleMarker" locked="0">
-          <prop k="angle" v="0"/>
           <prop k="color" v="255,255,255,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="rectangle"/>
+          <prop k="name" v="circle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
@@ -75,20 +60,15 @@
           <prop k="size_unit" v="MM"/>
           <prop k="vertical_anchor_point" v="1"/>
         </layer>
-        <layer pass="0" class="SimpleMarker" locked="0">
+        <layer pass="0" class="FontMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="255,0,0,255"/>
+          <prop k="chr" v="А"/>
+          <prop k="color" v="0,0,0,255"/>
+          <prop k="font" v="OpenGost Type B TT"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="cross2"/>
-          <prop k="offset" v="0,0"/>
+          <prop k="offset" v="0,-0.4"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="0,0,0,255"/>
-          <prop k="outline_style" v="solid"/>
-          <prop k="outline_width" v="0"/>
-          <prop k="outline_width_map_unit_scale" v="0,0"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="scale_method" v="area"/>
           <prop k="size" v="5"/>
           <prop k="size_map_unit_scale" v="0,0"/>
           <prop k="size_unit" v="MM"/>
@@ -100,7 +80,7 @@
           <prop k="angle" v="0"/>
           <prop k="color" v="255,255,255,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="rectangle"/>
+          <prop k="name" v="circle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
@@ -115,11 +95,97 @@
           <prop k="size_unit" v="MM"/>
           <prop k="vertical_anchor_point" v="1"/>
         </layer>
+        <layer pass="0" class="FontMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="chr" v="К"/>
+          <prop k="color" v="0,0,0,255"/>
+          <prop k="font" v="OpenGost Type B TT"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="offset" v="0,-0.4"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="2">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="255,0,0,255"/>
+          <prop k="color" v="255,255,255,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="cross2"/>
+          <prop k="name" v="circle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="solid"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+        <layer pass="0" class="FontMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="chr" v="П"/>
+          <prop k="color" v="0,0,0,255"/>
+          <prop k="font" v="OpenGost Type B TT"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="offset" v="0,-0.4"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="3">
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="255,255,255,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="circle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="solid"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+        <layer pass="0" class="FontMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="chr" v="О"/>
+          <prop k="color" v="0,0,0,255"/>
+          <prop k="font" v="OpenGost Type B TT"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="offset" v="0,-0.4"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="4">
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="255,255,255,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="circle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
@@ -135,12 +201,12 @@
           <prop k="vertical_anchor_point" v="1"/>
         </layer>
       </symbol>
-      <symbol alpha="1" type="marker" name="2">
+      <symbol alpha="1" type="marker" name="5">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
           <prop k="color" v="255,255,255,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="rectangle"/>
+          <prop k="name" v="circle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
@@ -155,11 +221,27 @@
           <prop k="size_unit" v="MM"/>
           <prop k="vertical_anchor_point" v="1"/>
         </layer>
+        <layer pass="0" class="FontMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="chr" v="Т"/>
+          <prop k="color" v="0,0,0,255"/>
+          <prop k="font" v="OpenGost Type B TT"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="offset" v="0,-0.4"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="marker" name="6">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="255,0,0,255"/>
+          <prop k="color" v="255,255,255,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="cross2"/>
+          <prop k="name" v="circle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
@@ -180,9 +262,9 @@
       <symbol alpha="1" type="marker" name="0">
         <layer pass="0" class="SimpleMarker" locked="0">
           <prop k="angle" v="0"/>
-          <prop k="color" v="255,255,255,255"/>
+          <prop k="color" v="112,203,15,255"/>
           <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="rectangle"/>
+          <prop k="name" v="circle"/>
           <prop k="offset" v="0,0"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
@@ -192,26 +274,7 @@
           <prop k="outline_width_map_unit_scale" v="0,0"/>
           <prop k="outline_width_unit" v="MM"/>
           <prop k="scale_method" v="area"/>
-          <prop k="size" v="5"/>
-          <prop k="size_map_unit_scale" v="0,0"/>
-          <prop k="size_unit" v="MM"/>
-          <prop k="vertical_anchor_point" v="1"/>
-        </layer>
-        <layer pass="0" class="SimpleMarker" locked="0">
-          <prop k="angle" v="0"/>
-          <prop k="color" v="255,0,0,255"/>
-          <prop k="horizontal_anchor_point" v="1"/>
-          <prop k="name" v="cross2"/>
-          <prop k="offset" v="0,0"/>
-          <prop k="offset_map_unit_scale" v="0,0"/>
-          <prop k="offset_unit" v="MM"/>
-          <prop k="outline_color" v="0,0,0,255"/>
-          <prop k="outline_style" v="solid"/>
-          <prop k="outline_width" v="0"/>
-          <prop k="outline_width_map_unit_scale" v="0,0"/>
-          <prop k="outline_width_unit" v="MM"/>
-          <prop k="scale_method" v="area"/>
-          <prop k="size" v="5"/>
+          <prop k="size" v="2"/>
           <prop k="size_map_unit_scale" v="0,0"/>
           <prop k="size_unit" v="MM"/>
           <prop k="vertical_anchor_point" v="1"/>
@@ -245,7 +308,7 @@
     <property key="labeling/centroidWhole" value="false"/>
     <property key="labeling/decimals" value="3"/>
     <property key="labeling/displayAll" value="false"/>
-    <property key="labeling/dist" value="5"/>
+    <property key="labeling/dist" value="3"/>
     <property key="labeling/distInMapUnits" value="false"/>
     <property key="labeling/distMapUnitMaxScale" value="0"/>
     <property key="labeling/distMapUnitMinScale" value="0"/>
@@ -290,7 +353,7 @@
     <property key="labeling/plussign" value="false"/>
     <property key="labeling/preserveRotation" value="true"/>
     <property key="labeling/previewBkgrdColor" value="#ffffff"/>
-    <property key="labeling/priority" value="6"/>
+    <property key="labeling/priority" value="5"/>
     <property key="labeling/quadOffset" value="4"/>
     <property key="labeling/repeatDistance" value="0"/>
     <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
@@ -397,13 +460,11 @@
   <annotationform></annotationform>
   <editorlayout>generatedlayout</editorlayout>
   <aliases>
-    <alias field="description" index="6" name="Описание"/>
+    <alias field="description" index="4" name="Описание"/>
     <alias field="name" index="0" name="Наименование"/>
-    <alias field="status_built" index="2" name="Статус строительства"/>
-    <alias field="status_built_ch" index="3" name="Изменение статуса"/>
-    <alias field="status_check" index="4" name="Статус проверки"/>
-    <alias field="status_check_ch" index="5" name="Изменение статуса проверки"/>
-    <alias field="type_optical_cross" index="1" name="Тип"/>
+    <alias field="owner" index="3" name="Собственник"/>
+    <alias field="type_tower" index="1" name="Тип"/>
+    <alias field="voltage" index="2" name="Напряжение"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
