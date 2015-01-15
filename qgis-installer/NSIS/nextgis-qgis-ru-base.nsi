@@ -89,7 +89,7 @@ SectionEnd
 
 Section "-OSGEO4W_ENV" OSGEO4W_ENV
     SetOutPath "$INSTALL_DIR\"
-	File /r "${OSGEO4W_SRC_DIR}\*.*"
+	File /r ${OSGEO4W_SRC_DIR}
 SectionEnd
 
 Section "-QGIS" QGIS
@@ -138,11 +138,6 @@ Section "-SAGA" SAGA
 	File /r "${SAGA_SRC_DIR}\*.*"
 SectionEnd
 
-Section "-GDAL" GDAL
-    SetOutPath "$INSTALL_DIR\"
-	File /r "${GDAL_SRC_DIR}\*.*"
-SectionEnd
-
 Section "-FONTS" FONTS
     SetOutPath "$INSTALL_DIR\fonts\"
 	File /r "${FONTS_DIR}\*.*"
@@ -156,10 +151,10 @@ Section "-DONE"
     SetShellVarContext all
     CreateDirectory "$SMPROGRAMS\${PROGRAM_NAME}"
     GetFullPathName /SHORT $0 $INSTALL_DIR
-    ;System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("OSGEO4W_ROOT", "$0").r0'
-    SetEnv::SetEnvVar "OSGEO4W_ROOT" "$0"
-    ;System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("OSGEO4W_STARTMENU", "$SMPROGRAMS\${PROGRAM_NAME}").r0'
-    SetEnv::SetEnvVar "OSGEO4W_STARTMENU" "$SMPROGRAMS\${PROGRAM_NAME}"
+    System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("OSGEO4W_ROOT", "$0").r0'
+    ;SetEnv::SetEnvVar "OSGEO4W_ROOT" "$0"
+    System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("OSGEO4W_STARTMENU", "$SMPROGRAMS\${PROGRAM_NAME}").r0'
+    ;SetEnv::SetEnvVar "OSGEO4W_STARTMENU" "$SMPROGRAMS\${PROGRAM_NAME}"
     
     ReadEnvStr $0 COMSPEC
     nsExec::ExecToLog '"$0" /c "$INSTALL_DIR\postinstall.bat"'
@@ -269,9 +264,9 @@ FunctionEnd
 Section "Uninstall"
 	GetFullPathName /SHORT $0 $INSTDIR
 	System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("OSGEO4W_ROOT", "$0").r0'
-    SetEnv::SetEnvVar "OSGEO4W_ROOT" "$0"
+    ;SetEnv::SetEnvVar "OSGEO4W_ROOT" "$0"
 	System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("OSGEO4W_STARTMENU", "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}").r0'
-    SetEnv::SetEnvVar "OSGEO4W_STARTMENU" "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}"
+    ;SetEnv::SetEnvVar "OSGEO4W_STARTMENU" "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}"
 
 	ReadEnvStr $0 COMSPEC
 	nsExec::ExecToLog '"$0" /c "$INSTALL_DIR\preremove.bat"'
