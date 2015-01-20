@@ -24,7 +24,6 @@
 !!!
 """
 from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QIcon
 
 from ..ngw_api.ngw_group_resource import NGWGroupResource
 from ..ngw_api.qt_ngw_resources_model import QNGWResourceItem
@@ -50,6 +49,9 @@ class QNGWCompulinkResourceItem(QNGWResourceItem):
                 NGWSituationPlan.type_id,
             ]:
                 self._children.append(QNGWCompulinkResourceItem(resource_child, self))
+
+        #Сортировка по имени
+        self._children.sort(key=lambda el: el.data(Qt.DisplayRole).lower())
 
         self._children_loads = True
 
