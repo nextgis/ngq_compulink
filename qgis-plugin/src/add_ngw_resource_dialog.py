@@ -76,6 +76,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
     def add_resource(self):
         sel_index = self.trvResources.selectionModel().currentIndex()
         if sel_index.isValid():
+            self.hide() #hack
             ngw_resource = sel_index.data(Qt.UserRole)
             if ngw_resource.common.cls == NGWFoclProject.type_id:
                 for child in ngw_resource.get_children():
@@ -83,7 +84,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             else:
                 parent_resource = sel_index.parent().data(Qt.UserRole)
                 self._append_resource_to_map(ngw_resource, parent_resource)
-
+            self.close()
 
 
     def _append_resource_to_map(self, ngw_resource, parent_resource):
