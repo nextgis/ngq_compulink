@@ -34,7 +34,9 @@ from os import path
 from PyQt4 import uic
 from PyQt4.QtGui import QDialog
 from PyQt4.QtCore import Qt
-from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer, QgsMessageLog
+from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer, QgsMessageLog, QgsRectangle, QgsMapLayer
+from qgis.gui import QgsLayerTreeViewDefaultActions
+
 
 from ngw_api.ngw_wfs_service import NGWWfsService
 from ngw_api.qt_ngw_resources_model import QNGWResourcesModel
@@ -49,9 +51,10 @@ FORM_CLASS, _ = uic.loadUiType(path.join(
 
 
 class AddNgwResourceDialog(QDialog, FORM_CLASS):
-    def __init__(self, ngw_root_resource, parent=None):
+    def __init__(self, ngw_root_resource, parent=None, iface=None):
         super(AddNgwResourceDialog, self).__init__(parent)
         self.setupUi(self)
+        self._iface = iface
 
         #model
         self._root_item = QNGWCompulinkResourceItem(ngw_root_resource, None)
@@ -76,18 +79,31 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
     def add_resource(self):
         sel_index = self.trvResources.selectionModel().currentIndex()
         if sel_index.isValid():
+            #extent for_zoom
+            summary_extent = QgsRectangle()
+            summary_extent.setMinimal()
+
             self.hide() #hack
             ngw_resource = sel_index.data(Qt.UserRole)
             if ngw_resource.common.cls == NGWFoclProject.type_id:
                 for child in ngw_resource.get_children():
-                    self._append_resource_to_map(child, ngw_resource)
+                    self._append_resource_to_map(child, ngw_resource, summary_extent)
             else:
                 parent_resource = sel_index.parent().data(Qt.UserRole)
-                self._append_resource_to_map(ngw_resource, parent_resource)
+                self._append_resource_to_map(ngw_resource, parent_resource, summary_extent)
+
+            self.zoom_to_extent(summary_extent)
             self.close()
 
+    def zoom_to_extent(self, extent):
+        if not self._iface or not extent or extent.isNull():
+            return
+        extent.scale(1.05)
+        self._iface.mapCanvas().setExtent(extent)
+        self._iface.mapCanvas().refresh()
 
-    def _append_resource_to_map(self, ngw_resource, parent_resource):
+
+    def _append_resource_to_map(self, ngw_resource, parent_resource, summary_extent):
         children = ngw_resource.get_children()
         wfs_resources = [ch for ch in children if isinstance(ch, NGWWfsService)]
         if len(wfs_resources) < 1:
@@ -111,6 +127,9 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             url = wfs_resource.get_wfs_url(wfs_layer.keyname) + '&srsname=EPSG:3857&VERSION=1.0.0&REQUEST=GetFeature'
             qgs_wfs_layer = QgsVectorLayer(url, wfs_layer.display_name, 'WFS')
 
+            #summarize extent
+            self._summ_extent(summary_extent, qgs_wfs_layer)
+
             QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
             layers_group.insertLayer(0, qgs_wfs_layer)
 
@@ -120,3 +139,18 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             else:
                 message = self.tr('Style for layer "%s" (%s) not found!') % (wfs_layer.display_name, wfs_layer.keyname)
                 QgsMessageLog.logMessage(message, level=QgsMessageLog.WARNING)
+
+    def _summ_extent(self, summary_extent, layer):
+        layer_extent = layer.extent()
+
+        if layer_extent.isEmpty() and layer.type() == QgsMapLayer.VectorLayer:
+            layer.updateExtents()
+            layer_extent = layer.extent()
+
+        if layer_extent.isNull():
+            return
+
+        if self._iface.mapCanvas().hasCrsTransformEnabled():
+            layer_extent = self._iface.mapCanvas().layerExtentToOutputExtent(layer, layer_extent)
+
+        summary_extent.combineExtentWith(layer_extent)

@@ -247,7 +247,7 @@ class CompulinkToolsPlugin:
             QgsMessageLog.logMessage(error_message, level=QgsMessageLog.CRITICAL)
             return
 
-        res_dialog = AddNgwResourceDialog(root_rsc)
+        res_dialog = AddNgwResourceDialog(root_rsc, iface=self.iface)
         res_dialog.exec_()
 
     def settings(self):
