@@ -26,7 +26,7 @@
 """
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QSortFilterProxyModel
-from ..ngw_api.ngw_group_resource import NGWGroupResource
+from ..ngw_api.core.ngw_group_resource import NGWGroupResource
 from ngw_focl_proj import NGWFoclProject
 from ngw_focl_struct import NGWFoclStruct
 from ngw_situation_plan import NGWSituationPlan

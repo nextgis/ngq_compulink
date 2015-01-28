@@ -35,15 +35,14 @@ from PyQt4 import uic
 from PyQt4.QtGui import QDialog
 from PyQt4.QtCore import Qt
 from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer, QgsMessageLog, QgsRectangle, QgsMapLayer
-from qgis.gui import QgsLayerTreeViewDefaultActions
 
 
-from ngw_api.ngw_wfs_service import NGWWfsService
-from ngw_api.qt_ngw_resources_model import QNGWResourcesModel
+from ngw_api.core.ngw_wfs_service import NGWWfsService
+from ngw_api.qt.qt_ngw_resource_model import QNGWResourcesModel
 from ngw_compulink.ngw_focl_struct import NGWFoclStruct
 from ngw_compulink.ngw_situation_plan import NGWSituationPlan
 from ngw_compulink.ngw_focl_proj import NGWFoclProject
-from ngw_compulink.qt_compulink_resources_model import QNGWCompulinkResourceItem
+from ngw_compulink.qt_compulink_resource_model import QNGWCompulinkResourceItem
 
 
 FORM_CLASS, _ = uic.loadUiType(path.join(

@@ -25,7 +25,7 @@
 import os
 from PyQt4 import uic
 from PyQt4.QtGui import QDialog
-from ngw_api.ngw_connection_settings import NGWConnectionSettings
+from ngw_api.core.ngw_connection_settings import NGWConnectionSettings
 
 from plugin_settings import PluginSettings
 

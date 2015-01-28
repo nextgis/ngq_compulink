@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings
-from ngw_api.ngw_connection_settings import NGWConnectionSettings
+from ngw_api.core.ngw_connection_settings import NGWConnectionSettings
 
 
 class PluginSettings():

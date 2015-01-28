@@ -29,7 +29,7 @@ from qgis.core import QgsMapLayerRegistry, QgsRasterLayer, QgsMessageLog, QgsApp
 from qgis.gui import QgsMessageBar
 from os import path
 from add_ngw_resource_dialog import AddNgwResourceDialog
-from ngw_api.ngw_resource_factory import NGWResourceFactory
+from ngw_api.core.ngw_resource_factory import NGWResourceFactory
 from ngw_compulink.ngw_focl_struct import NGWFoclStruct
 from ngw_compulink.ngw_focl_proj import NGWFoclProject
 from ngw_compulink.ngw_situation_plan import NGWSituationPlan

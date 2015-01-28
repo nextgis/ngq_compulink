@@ -25,8 +25,8 @@
 """
 from PyQt4.QtCore import Qt
 
-from ..ngw_api.ngw_group_resource import NGWGroupResource
-from ..ngw_api.qt_ngw_resources_model import QNGWResourceItem
+from ..ngw_api.core.ngw_group_resource import NGWGroupResource
+from ..ngw_api.qt.qt_ngw_resource_item import QNGWResourceItem
 from ngw_focl_proj import NGWFoclProject
 from ngw_focl_struct import NGWFoclStruct
 from ngw_situation_plan import NGWSituationPlan

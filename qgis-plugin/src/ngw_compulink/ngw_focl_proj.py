@@ -19,7 +19,7 @@
  ***************************************************************************/
 """
 from os import path
-from ..ngw_api.ngw_resource import NGWResource
+from ..ngw_api.core.ngw_resource import NGWResource
 
 
 class NGWFoclProject(NGWResource):
