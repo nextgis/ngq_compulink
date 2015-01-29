@@ -34,7 +34,7 @@ import os
 from PyQt4 import uic
 from PyQt4.QtGui import QDialog
 
-from new_ngw_connection_dialog import NewNGWConnectionDialog
+from ngw_api.qgis.ngw_connection_edit_dialog import NGWConnectionEditDialog
 from plugin_settings import PluginSettings
 
 
@@ -55,14 +55,28 @@ class SettingsDialog(QDialog, FORM_CLASS):
         self.populate_connection_list()
 
     def new_connection(self):
-        dlg = NewNGWConnectionDialog(self)
+        dlg = NGWConnectionEditDialog()
         if dlg.exec_():
+            conn_sett = dlg.ngw_connection_settings
+            PluginSettings.save_ngw_connection(conn_sett)
             self.populate_connection_list()
         del dlg
 
     def edit_connection(self):
-        dlg = NewNGWConnectionDialog(self, self.cmbConnections.currentText())
+        conn_name = self.cmbConnections.currentText()
+        conn_sett = None
+
+        if conn_name is not None:
+            conn_sett = PluginSettings.get_ngw_connection(conn_name)
+
+        dlg = NGWConnectionEditDialog(ngw_connection_settings=conn_sett)
         if dlg.exec_():
+            conn_sett = dlg.ngw_connection_settings
+            # if conn was renamed - remove old
+            if conn_name is not None and conn_name != conn_sett.connection_name:
+                PluginSettings.remove_ngw_connection(conn_name)
+            # save new
+            PluginSettings.save_ngw_connection(conn_sett)
             self.populate_connection_list()
         del dlg
 
