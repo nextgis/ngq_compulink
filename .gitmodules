@@ -1,3 +1,0 @@
-[submodule "qgis-plugin/src/qgis-plugin/src/ngw_api"]
-	path = qgis-plugin/src/qgis-plugin/src/ngw_api
-	url = git@github.com:nextgis/ngw_external_api_python.git
