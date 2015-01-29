@@ -20,10 +20,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-from ngw_api.qgis.plugin_settings import PluginSettings
+from ngw_api.qgis.ngw_plugin_settings import NgwPluginSettings
 
 
-class PluginSettings(PluginSettings):
+class PluginSettings(NgwPluginSettings):
 
     _company_name = 'NextGIS'
     _product = 'CompulinkTools'
