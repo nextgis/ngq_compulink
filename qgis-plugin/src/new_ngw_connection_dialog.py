@@ -51,7 +51,7 @@ class NewNGWConnectionDialog(QDialog, FORM_CLASS):
         self.connection_name = connection_name
 
         if self.connection_name is not None:
-            conn_sett = PluginSettings.get_connection(self.connection_name)
+            conn_sett = PluginSettings.get_ngw_connection(self.connection_name)
             self.leName.setText(conn_sett.connection_name)
             self.leUrl.setText(conn_sett.server_url)
             self.leUser.setText(conn_sett.username)
@@ -60,13 +60,13 @@ class NewNGWConnectionDialog(QDialog, FORM_CLASS):
     def accept(self):
         if self.connection_name is not None and \
                 self.connection_name != self.leName.text():
-            PluginSettings.remove_connection(self.connection_name)
+            PluginSettings.remove_ngw_connection(self.connection_name)
 
         conn_sett = NGWConnectionSettings(
             self.leName.text(),
             self.leUrl.text(),
             self.leUser.text(),
             self.lePassword.text())
-        PluginSettings.save_connection(conn_sett)
+        PluginSettings.save_ngw_connection(conn_sett)
 
         QDialog.accept(self)

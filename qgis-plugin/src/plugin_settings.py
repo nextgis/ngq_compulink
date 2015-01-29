@@ -20,56 +20,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings
-from ngw_api.core.ngw_connection_settings import NGWConnectionSettings
+from ngw_api.qgis.plugin_settings import PluginSettings
 
 
-class PluginSettings():
+class PluginSettings(PluginSettings):
 
-    @classmethod
-    def get_settings(cls):
-        return QSettings('NextGIS', 'CompulinkTools')
-
-    @classmethod
-    def remove_connection(cls, connection_name):
-        settings = cls.get_settings()
-        key = '/connections/' + connection_name
-        settings.remove(key)
-
-    @classmethod
-    def get_connection(cls, connection_name):
-        settings = cls.get_settings()
-        key = '/connections/' + connection_name
-
-        return NGWConnectionSettings(
-            connection_name,
-            settings.value(key + '/server_url', ''),
-            settings.value(key + '/username', ''),
-            settings.value(key + '/password', '')
-        )
-
-    @classmethod
-    def save_connection(cls, connection_settings):
-        settings = cls.get_settings()
-        key = '/connections/' + connection_settings.connection_name
-        settings.setValue(key + '/server_url', connection_settings.server_url)
-        settings.setValue(key + '/username', connection_settings.username)
-        settings.setValue(key + '/password', connection_settings.password)
-
-    @classmethod
-    def get_last_connection_name(cls):
-        settings = cls.get_settings()
-        return settings.value('/ui/lastConnection', '')
-
-    @classmethod
-    def set_last_connection_name(cls, connection_name):
-        settings = cls.get_settings()
-        settings.setValue('/ui/lastConnection', connection_name)
-
-    @classmethod
-    def get_connection_names(cls):
-        settings = cls.get_settings()
-        settings.beginGroup('/connections')
-        connections = settings.childGroups()
-        settings.endGroup()
-        return connections
+    _company_name = 'NextGIS'
+    _product = 'CompulinkTools'

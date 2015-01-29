@@ -220,7 +220,7 @@ class CompulinkToolsPlugin:
         #import pydevd
         #pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True, suspend=False)
 
-        conn_name = PluginSettings.get_last_connection_name()
+        conn_name = PluginSettings.get_selected_ngw_connection_name()
         if not conn_name:
             error_message = self.tr('You must configure at least one connection!')
             self.iface.messageBar().pushMessage(self.tr('WARNING'),
@@ -228,7 +228,7 @@ class CompulinkToolsPlugin:
                                                 level=QgsMessageBar.WARNING)
             QgsMessageLog.logMessage(error_message, level=QgsMessageLog.WARNING)
             return
-        conn_sett = PluginSettings.get_connection(conn_name)
+        conn_sett = PluginSettings.get_ngw_connection(conn_name)
 
         #setup ngw api
         rsc_factory = NGWResourceFactory(conn_sett)
