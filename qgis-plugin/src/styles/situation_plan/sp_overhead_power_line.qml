@@ -1,10 +1,7 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.6.0-Brighton" minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.7.0-Master" minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="TextEdit" name="name">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-    </edittype>
-    <edittype widgetv2type="TextEdit" name="description">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
     <edittype widgetv2type="ValueMap" name="voltage">
@@ -17,6 +14,9 @@
     </edittype>
     <edittype widgetv2type="UniqueValues" name="owner">
       <widgetv2config fieldEditable="1" labelOnTop="0" Editable="1"/>
+    </edittype>
+    <edittype widgetv2type="TextEdit" name="description">
+      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
   </edittypes>
   <renderer-v2 attr="voltage" symbollevels="0" type="categorizedSymbol">
@@ -93,9 +93,9 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="223,86,223,255"/>
+          <prop k="line_color" v="0,255,0,255"/>
           <prop k="line_style" v="solid"/>
-          <prop k="line_width" v="0.26"/>
+          <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
@@ -112,9 +112,9 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="188,188,188,255"/>
+          <prop k="line_color" v="167,167,167,255"/>
           <prop k="line_style" v="solid"/>
-          <prop k="line_width" v="0.26"/>
+          <prop k="line_width" v="0.66"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
@@ -317,15 +317,15 @@
     <selectedonly on=""/>
   </labelattributes>
   <editform></editform>
-  <editforminit></editforminit>
+  <editforminit/>
   <featformsuppress>0</featformsuppress>
   <annotationform></annotationform>
   <editorlayout>generatedlayout</editorlayout>
   <aliases>
-    <alias field="description" index="1" name="Описание"/>
+    <alias field="description" index="3" name="Описание"/>
     <alias field="name" index="0" name="Наименование"/>
-    <alias field="owner" index="3" name="Собственник"/>
-    <alias field="voltage" index="2" name="Напряжение"/>
+    <alias field="owner" index="2" name="Собственник"/>
+    <alias field="voltage" index="1" name="Напряжение"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
