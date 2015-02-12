@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.6.0-Brighton" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.7.0-Master" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="TextEdit" name="name">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -29,18 +29,14 @@
   </edittypes>
   <renderer-v2 symbollevels="0" type="RuleRenderer">
     <rules key="{68f3d3af-296a-4a19-b9c0-837d5c794ef1}">
-      <rule filter=" &quot;existing&quot; = 'projected'" key="{48c596f0-b19f-463b-ae91-ca81dd736694}" label="Проектируемый(ая)">
-        <rule filter=" &quot;laying_method&quot;  = 'ground'" key="{5956df41-ca14-4b9d-ae0b-19d324a539c5}" symbol="0" label="В грунте"/>
-        <rule filter=" &quot;laying_method&quot;  = 'air_link'" key="{e0375df4-b5fa-455b-aaa7-c995e8a8b41e}" symbol="1" label="По ВЛС"/>
-        <rule filter=" &quot;laying_method&quot;  = 'transmission_towers'" key="{76e0d397-3850-4c9d-9c7d-ba5cebc49eb1}" symbol="2" label="По ВЛ"/>
-        <rule filter=" &quot;laying_method&quot;  = 'canalization'" key="{d43b6151-99d3-47b5-9c08-9a947d5a3ba8}" symbol="3" label="В кабельной канализации"/>
-      </rule>
-      <rule filter=" &quot;existing&quot;  = 'existing'" key="{7658b370-6f80-4ad8-a00e-ff0a47f144a8}" label="Существующий(ая)">
-        <rule filter=" &quot;laying_method&quot;  = 'ground'" key="{c2f31819-6dbf-4265-889f-f7173d2d0537}" symbol="4" label="В грунте"/>
-        <rule filter=" &quot;laying_method&quot;  = 'air_link'" key="{9ac4f93a-465d-41dc-9397-27db44b33229}" symbol="5" label="По ВЛС"/>
-        <rule filter=" &quot;laying_method&quot;  = 'transmission_towers'" key="{e864777c-2356-4e44-961f-6b19661ea975}" symbol="6" label="По ВЛ"/>
-        <rule filter=" &quot;laying_method&quot;  = 'canalization'" key="{773d7bc3-733e-49a6-bfd8-d5121acf3577}" symbol="7" label="В кабельной канализации"/>
-      </rule>
+      <rule filter=" &quot;laying_method&quot;  = 'ground' AND  &quot;existing&quot; = 'projected'" key="{fc27353f-614e-44d1-b746-18fd08e58400}" symbol="0" label="В грунте (проект.)"/>
+      <rule filter="&quot;laying_method&quot;  = 'ground' AND  &quot;existing&quot;  = 'existing' " key="{48620772-ce55-47c2-9607-f79bf2a9f2e1}" symbol="1" label="В грунте (сущ.)"/>
+      <rule filter=" &quot;laying_method&quot;  = 'air_link' AND  &quot;existing&quot; = 'projected'" key="{2c4f4e42-8ba5-4171-84a2-429a3ace785b}" symbol="2" label="По ВЛС (проект.)"/>
+      <rule filter="&quot;laying_method&quot;  = 'air_link' AND  &quot;existing&quot;  = 'existing' " key="{611cb0c1-6d33-442a-8fe2-14e5d74aa286}" symbol="3" label="По ВЛС (сущ.)"/>
+      <rule filter=" &quot;laying_method&quot;  = 'transmission_towers' AND  &quot;existing&quot; = 'projected'" key="{fa02f0e3-0968-4e7d-b1f5-77ef53dcfd7b}" symbol="4" label="По ВЛ (проект.)"/>
+      <rule filter="&quot;laying_method&quot;  = 'transmission_towers' AND  &quot;existing&quot;  = 'existing' " key="{d5041441-4230-47d9-97bd-3c5eb8bdb02c}" symbol="5" label="По ВЛ (сущ.)"/>
+      <rule filter=" &quot;laying_method&quot;  = 'canalization' AND  &quot;existing&quot; = 'projected'" key="{f25eb46b-9932-45f8-979e-3714824f148d}" symbol="6" label="В кабельной канализации (проект.)"/>
+      <rule filter="&quot;laying_method&quot;  = 'canalization' AND  &quot;existing&quot;  = 'existing' " key="{9e4adf24-4b2c-4ce8-871d-68e179620806}" symbol="7" label="В кабельной канализации (сущ.)"/>
     </rules>
     <symbols>
       <symbol alpha="1" type="line" name="0">
@@ -51,8 +47,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="156,121,0,255"/>
-          <prop k="line_style" v="dash"/>
+          <prop k="line_color" v="149,37,0,255"/>
+          <prop k="line_style" v="dash dot"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="-0.8"/>
@@ -70,8 +66,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="90,219,238,223"/>
-          <prop k="line_style" v="dash"/>
+          <prop k="line_color" v="221,110,1,255"/>
+          <prop k="line_style" v="dash dot"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="-0.8"/>
@@ -89,8 +85,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="0,0,0,255"/>
-          <prop k="line_style" v="dash"/>
+          <prop k="line_color" v="90,219,238,255"/>
+          <prop k="line_style" v="dash dot"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="-0.8"/>
@@ -108,8 +104,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="255,127,0,255"/>
-          <prop k="line_style" v="dash"/>
+          <prop k="line_color" v="90,219,238,255"/>
+          <prop k="line_style" v="solid"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="-0.8"/>
@@ -127,9 +123,9 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="156,121,0,255"/>
-          <prop k="line_style" v="solid"/>
-          <prop k="line_width" v="0.86"/>
+          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_style" v="dash"/>
+          <prop k="line_width" v="0.96"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="-0.8"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
@@ -146,7 +142,7 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="90,219,238,223"/>
+          <prop k="line_color" v="0,0,0,255"/>
           <prop k="line_style" v="solid"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
@@ -165,8 +161,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="0,0,0,255"/>
-          <prop k="line_style" v="solid"/>
+          <prop k="line_color" v="0,184,92,255"/>
+          <prop k="line_style" v="dash dot"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="-0.8"/>
@@ -184,7 +180,7 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="255,127,0,255"/>
+          <prop k="line_color" v="0,184,92,255"/>
           <prop k="line_style" v="solid"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
@@ -366,7 +362,7 @@
     <selectedonly on=""/>
   </labelattributes>
   <editform></editform>
-  <editforminit></editforminit>
+  <editforminit/>
   <featformsuppress>0</featformsuppress>
   <annotationform></annotationform>
   <editorlayout>generatedlayout</editorlayout>
