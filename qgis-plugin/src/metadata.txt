@@ -10,7 +10,7 @@
 name=Compulink tools
 qgisMinimumVersion=2.0
 description=Compulink QGIS tools
-version=0.5
+version=0.6
 author=NextGIS
 email=info@nextgis.com
 
