@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.7.0-Master" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.7.0-Master" minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="TextEdit" name="name">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -37,6 +37,7 @@
       <rule filter="&quot;laying_method&quot;  = 'transmission_towers' AND  &quot;existing&quot;  = 'existing' " key="{d5041441-4230-47d9-97bd-3c5eb8bdb02c}" symbol="5" label="По ВЛ (сущ.)"/>
       <rule filter=" &quot;laying_method&quot;  = 'canalization' AND  &quot;existing&quot; = 'projected'" key="{f25eb46b-9932-45f8-979e-3714824f148d}" symbol="6" label="В кабельной канализации (проект.)"/>
       <rule filter="&quot;laying_method&quot;  = 'canalization' AND  &quot;existing&quot;  = 'existing' " key="{9e4adf24-4b2c-4ce8-871d-68e179620806}" symbol="7" label="В кабельной канализации (сущ.)"/>
+      <rule filter="&quot;laying_method&quot; IS NULL OR  &quot;existing&quot; IS NULL " key="{c8931597-c8d4-4715-b76c-4d7189d92c2d}" symbol="8" label="Не определен"/>
     </rules>
     <symbols>
       <symbol alpha="1" type="line" name="0">
@@ -189,6 +190,54 @@
           <prop k="offset_unit" v="MM"/>
           <prop k="use_custom_dash" v="0"/>
           <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="8">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="MarkerLine" locked="0">
+          <prop k="interval" v="15"/>
+          <prop k="interval_map_unit_scale" v="0,0"/>
+          <prop k="interval_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_along_line" v="0"/>
+          <prop k="offset_along_line_map_unit_scale" v="0,0"/>
+          <prop k="offset_along_line_unit" v="MM"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="placement" v="interval"/>
+          <prop k="rotate" v="1"/>
+          <symbol alpha="1" type="marker" name="@8@1">
+            <layer pass="0" class="FontMarker" locked="0">
+              <prop k="angle" v="0"/>
+              <prop k="chr" v="?"/>
+              <prop k="color" v="255,0,0,255"/>
+              <prop k="font" v="DejaVu Sans"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="size" v="6"/>
+              <prop k="size_map_unit_scale" v="0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+            </layer>
+          </symbol>
         </layer>
       </symbol>
     </symbols>

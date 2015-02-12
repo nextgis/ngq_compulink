@@ -1,14 +1,14 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.7.0-Master" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.7.0-Master" minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="TextEdit" name="name">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
     <edittype widgetv2type="Range" name="fibers">
-      <widgetv2config AllowNull="1" fieldEditable="1" Step="1" Style="Slider" labelOnTop="0" Min="0" Max="30"/>
+      <widgetv2config AllowNull="0" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="100"/>
     </edittype>
     <edittype widgetv2type="Range" name="length">
-      <widgetv2config AllowNull="1" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="10000"/>
+      <widgetv2config AllowNull="0" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="10000"/>
     </edittype>
     <edittype widgetv2type="ValueMap" name="laying_method">
       <widgetv2config fieldEditable="1" labelOnTop="0">
@@ -52,6 +52,7 @@
       <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'air_link'" key="{08a21448-a83e-4e60-ac83-4fe5615b8739}" symbol="5" label="По ВЛС"/>
       <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'transmission_towers'" key="{9d84a9e4-fcf3-41b6-884c-5d7223fa9ffb}" symbol="6" label="По ВЛ"/>
       <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'canalization'" key="{92a263eb-8649-4b9f-aeee-aef3ffd2b951}" symbol="7" label="В кабельной канализации"/>
+      <rule filter="&quot;laying_method&quot; IS NULL OR  &quot;status_built&quot; IS NULL " key="{78c47413-07e6-4de4-b0aa-73885fa2a9a3}" symbol="8" label="Не определен"/>
     </rules>
     <symbols>
       <symbol alpha="1" type="line" name="0">
@@ -272,6 +273,54 @@
           <prop k="offset_unit" v="MM"/>
           <prop k="use_custom_dash" v="0"/>
           <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="8">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="MarkerLine" locked="0">
+          <prop k="interval" v="15"/>
+          <prop k="interval_map_unit_scale" v="0,0"/>
+          <prop k="interval_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_along_line" v="0"/>
+          <prop k="offset_along_line_map_unit_scale" v="0,0"/>
+          <prop k="offset_along_line_unit" v="MM"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="placement" v="interval"/>
+          <prop k="rotate" v="1"/>
+          <symbol alpha="1" type="marker" name="@8@1">
+            <layer pass="0" class="FontMarker" locked="0">
+              <prop k="angle" v="0"/>
+              <prop k="chr" v="?"/>
+              <prop k="color" v="255,0,0,255"/>
+              <prop k="font" v="DejaVu Sans"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="size" v="6"/>
+              <prop k="size_map_unit_scale" v="0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+            </layer>
+          </symbol>
         </layer>
       </symbol>
     </symbols>
