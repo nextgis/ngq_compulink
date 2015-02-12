@@ -32,7 +32,7 @@ __revision__ = '$Format:%H$'
 
 import os
 from PyQt4 import uic
-from PyQt4.QtGui import QDialog
+from PyQt4.QtGui import QDialog, QIcon
 
 from ngw_api.qgis.ngw_connection_edit_dialog import NGWConnectionEditDialog
 from plugin_settings import PluginSettings
@@ -47,6 +47,7 @@ class SettingsDialog(QDialog, FORM_CLASS):
         super(SettingsDialog, self).__init__(parent)
         self.setupUi(self)
         self.setFixedSize(self.size())
+        self.setWindowIcon(QIcon(os.path.dirname(__file__) + '/icon_settings.png'))
 
         self.btnNew.clicked.connect(self.new_connection)
         self.btnEdit.clicked.connect(self.edit_connection)

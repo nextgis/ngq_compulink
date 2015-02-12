@@ -191,7 +191,7 @@ class CompulinkToolsPlugin:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
         #Tools for NGW communicate
-        icon_path = self.plugin_dir + '/icon.png'
+        icon_path = self.plugin_dir + '/icon_list.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Add projects layers'),
@@ -200,7 +200,7 @@ class CompulinkToolsPlugin:
 
         #Settings
         self.add_group_separator()
-        icon_path = self.plugin_dir + '/icon.png'
+        icon_path = self.plugin_dir + '/icon_settings.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Settings'),

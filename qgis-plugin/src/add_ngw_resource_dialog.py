@@ -32,7 +32,7 @@ __revision__ = '$Format:%H$'
 from os import path
 
 from PyQt4 import uic
-from PyQt4.QtGui import QDialog
+from PyQt4.QtGui import QDialog, QIcon
 from PyQt4.QtCore import Qt
 from qgis.core import QgsMapLayerRegistry, QgsProject, QgsVectorLayer, QgsMessageLog, QgsRectangle, QgsMapLayer
 
@@ -53,7 +53,9 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
     def __init__(self, ngw_root_resource, parent=None, iface=None):
         super(AddNgwResourceDialog, self).__init__(parent)
         self.setupUi(self)
+        self.setWindowIcon(QIcon(path.dirname(__file__) + '/icon_list.png'))
         self._iface = iface
+
 
         #model
         self._root_item = QNGWCompulinkResourceItem(ngw_root_resource, None)
