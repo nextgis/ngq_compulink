@@ -4,9 +4,6 @@
     <edittype widgetv2type="TextEdit" name="name">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
-    <edittype widgetv2type="TextEdit" name="description">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-    </edittype>
     <edittype widgetv2type="ValueMap" name="existing">
       <widgetv2config fieldEditable="1" labelOnTop="0">
         <value key="Проектируемый(ая)" value="projected"/>
@@ -25,6 +22,9 @@
     </edittype>
     <edittype widgetv2type="UniqueValues" name="owner">
       <widgetv2config fieldEditable="1" labelOnTop="0" Editable="1"/>
+    </edittype>
+    <edittype widgetv2type="TextEdit" name="description">
+      <widgetv2config IsMultiline="1" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
   </edittypes>
   <renderer-v2 symbollevels="0" type="RuleRenderer">
@@ -416,11 +416,11 @@
   <annotationform></annotationform>
   <editorlayout>generatedlayout</editorlayout>
   <aliases>
-    <alias field="description" index="1" name="Описание"/>
-    <alias field="existing" index="2" name="Статус объекта"/>
-    <alias field="laying_method" index="3" name="Способ прокладки"/>
+    <alias field="description" index="4" name="Описание"/>
+    <alias field="existing" index="1" name="Статус объекта"/>
+    <alias field="laying_method" index="2" name="Способ прокладки"/>
     <alias field="name" index="0" name="Наименование"/>
-    <alias field="owner" index="4" name="Собственник"/>
+    <alias field="owner" index="3" name="Собственник"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>

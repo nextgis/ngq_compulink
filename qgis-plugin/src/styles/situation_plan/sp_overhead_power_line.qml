@@ -16,7 +16,7 @@
       <widgetv2config fieldEditable="1" labelOnTop="0" Editable="1"/>
     </edittype>
     <edittype widgetv2type="TextEdit" name="description">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+      <widgetv2config IsMultiline="1" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
   </edittypes>
   <renderer-v2 attr="voltage" symbollevels="0" type="categorizedSymbol">
