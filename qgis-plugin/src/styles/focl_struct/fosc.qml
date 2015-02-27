@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="2.7.0-Master" minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+<qgis version="2.8.1-Wien" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
   <edittypes>
     <edittype widgetv2type="ValueMap" name="type_fosc">
       <widgetv2config fieldEditable="1" labelOnTop="0">
@@ -336,9 +336,9 @@
     <alias field="fosc_placement" index="2" name="Место размещения"/>
     <alias field="name" index="1" name="Наименование"/>
     <alias field="status_built" index="3" name="Статус строительства"/>
-    <alias field="status_built_ch" index="4" name="Изменение статуса"/>
+    <alias field="status_built_ch" index="4" name="Дата изменения статуса"/>
     <alias field="status_check" index="5" name="Статус проверки"/>
-    <alias field="status_check_ch" index="6" name="Изменение статуса проверки"/>
+    <alias field="status_check_ch" index="6" name="Дата изменения статуса проверки"/>
     <alias field="type_fosc" index="0" name="Тип"/>
   </aliases>
   <excludeAttributesWMS/>
