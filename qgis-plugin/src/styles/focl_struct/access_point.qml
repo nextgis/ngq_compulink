@@ -7,23 +7,33 @@
     <edittype widgetv2type="TextEdit" name="address">
       <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
-    <edittype widgetv2type="TextEdit" name="status_built">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+    <edittype widgetv2type="ValueMap" name="status_built">
+      <widgetv2config fieldEditable="1" labelOnTop="0">
+        <value key="Построен" value="built"/>
+        <value key="Проект" value="project"/>
+      </widgetv2config>
     </edittype>
-    <edittype widgetv2type="TextEdit" name="status_built_ch">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+    <edittype widgetv2type="Hidden" name="status_built_ch">
+      <widgetv2config fieldEditable="1" labelOnTop="0"/>
     </edittype>
-    <edittype widgetv2type="TextEdit" name="status_check">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+    <edittype widgetv2type="ValueMap" name="status_check">
+      <widgetv2config fieldEditable="1" labelOnTop="0">
+        <value key="Не проверен" value="not_checked"/>
+        <value key="Проверен" value="checked"/>
+      </widgetv2config>
     </edittype>
-    <edittype widgetv2type="TextEdit" name="status_check_ch">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+    <edittype widgetv2type="Hidden" name="status_check_ch">
+      <widgetv2config fieldEditable="1" labelOnTop="0"/>
     </edittype>
     <edittype widgetv2type="TextEdit" name="description">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+      <widgetv2config IsMultiline="1" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
   </edittypes>
-  <renderer-v2 symbollevels="0" type="singleSymbol">
+  <renderer-v2 symbollevels="0" type="RuleRenderer">
+    <rules key="{c25f125b-5742-4dcf-97f1-e72df3d67a63}">
+      <rule filter="&quot;status_built&quot;  = 'project'  or &quot;status_built&quot;  IS NULL " key="{c35c1ff9-ac4f-4770-b5d8-d41692e14dda}" symbol="0" label="Проект"/>
+      <rule filter="&quot;status_built&quot;  = 'built' " key="{3f636a2f-9be7-486b-b583-a9afa2569399}" symbol="1" label="Построен"/>
+    </rules>
     <symbols>
       <symbol alpha="1" type="marker" name="0">
         <layer pass="0" class="SimpleMarker" locked="0">
@@ -46,9 +56,47 @@
           <prop k="vertical_anchor_point" v="1"/>
         </layer>
       </symbol>
+      <symbol alpha="1" type="marker" name="1">
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="134,245,29,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="circle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="no"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="7.6"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+        <layer pass="0" class="SimpleMarker" locked="0">
+          <prop k="angle" v="0"/>
+          <prop k="color" v="0,0,0,255"/>
+          <prop k="horizontal_anchor_point" v="1"/>
+          <prop k="name" v="circle"/>
+          <prop k="offset" v="0,0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="outline_color" v="0,0,0,255"/>
+          <prop k="outline_style" v="solid"/>
+          <prop k="outline_width" v="0"/>
+          <prop k="outline_width_map_unit_scale" v="0,0"/>
+          <prop k="outline_width_unit" v="MM"/>
+          <prop k="scale_method" v="area"/>
+          <prop k="size" v="5"/>
+          <prop k="size_map_unit_scale" v="0,0"/>
+          <prop k="size_unit" v="MM"/>
+          <prop k="vertical_anchor_point" v="1"/>
+        </layer>
+      </symbol>
     </symbols>
-    <rotation/>
-    <sizescale scalemethod="area"/>
   </renderer-v2>
   <customproperties>
     <property key="labeling" value="pal"/>
