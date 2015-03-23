@@ -57,6 +57,9 @@ class SettingsDialog(QDialog, FORM_CLASS):
 
     def new_connection(self):
         dlg = NGWConnectionEditDialog()
+        dlg.leName.setText('Compulink')
+        dlg.leUrl.setText('http://gis.compulink.ru/')
+        dlg.leUser.setFocus()
         if dlg.exec_():
             conn_sett = dlg.ngw_connection_settings
             PluginSettings.save_ngw_connection(conn_sett)
