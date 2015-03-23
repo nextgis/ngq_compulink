@@ -2,8 +2,8 @@ diff --git a/i18n/qgis_ru.ts b/i18n/qgis_ru.ts
 index efe34d6..1815d94 100644
 --- a/i18n/qgis_ru.ts
 +++ b/i18n/qgis_ru.ts
-@@ -76651,4 +76651,11 @@ Convert a string into Qt data type.
-         <translation>...</translation>
+@@ -62765,4 +62765,11 @@ Convert a string into Qt data type.
+         <translation type="unfinished"></translation>
      </message>
  </context>
 +<context>

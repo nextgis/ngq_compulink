@@ -25,6 +25,12 @@ ShowInstDetails show
 ShowUnInstDetails show
 
 !define MUI_ABORTWARNING
+
+;--- Common parameters ---
+!define NGQ_UTILS_DIR "..\ngq-utils"
+!define NGQ_PRINT_TEMPLATES_DIR "..\ngq-print-templates"
+
+
 !define MUI_ICON "${PROGRAM_RUN_LNK_ICO_PATH}"
 !define MUI_UNICON "${PROGRAM_RUN_LNK_ICO_PATH}"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "..\Installer-Files\WelcomeFinishPage_ru.bmp"
@@ -106,6 +112,9 @@ Section "-QGIS" QGIS
     
     SetOutPath "$INSTALL_DIR\images"
     File /r "${PROGRAM_RUN_LNK_ICO_PATH}"
+    
+    SetOutPath "$INSTALL_DIR\ngq-utils"
+    File /nonfatal /r "${NGQ_UTILS_DIR}\*.*"
 SectionEnd
 
 Section "-QGIS_CUSTOMIZATION" QGIS_CUSTOMIZATION
@@ -145,6 +154,16 @@ Section "-FONTS" FONTS
     File /r "..\Installer-Files\install_font.bat"
     File /r "..\Installer-Files\install_fonts.bat"
 SectionEnd
+
+!ifdef  NGQ_PRINT_TEMPLATES_DIR
+Section "PRINT_TEMPLATES" PRINT_TEMPLATES   
+    SetOutPath "$INSTALL_DIR\apps\qgis\composer_templates"
+    File /r "${NGQ_PRINT_TEMPLATES_DIR}\print_templates\*.*"
+    
+    SetOutPath "$INSTALL_DIR\ngq-media\4print_templates"
+    File /r "${NGQ_PRINT_TEMPLATES_DIR}\print_templates_img\*.*"
+SectionEnd
+!endif
 ;--------------------------------
 Section "-DONE"
     SetShellVarContext current
@@ -159,6 +178,10 @@ Section "-DONE"
     ReadEnvStr $0 COMSPEC
     nsExec::ExecToLog '"$0" /c "$INSTALL_DIR\postinstall.bat"'
     ;IfFileExists "$INSTALL_DIR\etc\reboot" RebootNecessary NoRebootNecessary
+    
+    !ifdef  NGQ_PRINT_TEMPLATES_DIR
+        nsExec::ExecToLog '"$0" /c " "$INSTALL_DIR\ngq-utils\ngq_template_process.bat" "$INSTALL_DIR\apps\qgis\composer_templates" "$INSTALL_DIR\ngq-media\4print_templates" > "$INSTALL_DIR\install_print_templates.log" "'
+    !endif
     
     nsExec::ExecToLog '"$0" /c "$INSTALL_DIR\install_fonts.bat">>fonts_installation.log'
     SetRebootFlag true

@@ -1,0 +1,90 @@
+diff --git a/python/core/qgsvectordataprovider.sip b/python/core/qgsvectordataprovider.sip
+index 6d03099..6fc6ff5 100644
+--- a/python/core/qgsvectordataprovider.sip
++++ b/python/core/qgsvectordataprovider.sip
+@@ -240,6 +240,11 @@ class QgsVectorDataProvider : QgsDataProvider
+     int fieldNameIndex( const QString& fieldName ) const;
+ 
+     /**
++     * Returns feature datasource id from FID
++     */
++    virtual QString idFromFid( const int fid ) const;
++
++    /**
+      * Return a map where the key is the name of the field and the value is its index
+      */
+     QMap<QString, int> fieldNameMap() const;
+diff --git a/src/core/qgsvectordataprovider.cpp b/src/core/qgsvectordataprovider.cpp
+index a0a307a..5998ac6 100644
+--- a/src/core/qgsvectordataprovider.cpp
++++ b/src/core/qgsvectordataprovider.cpp
+@@ -210,7 +210,6 @@ QString QgsVectorDataProvider::capabilitiesString() const
+ 
+ }
+ 
+-
+ int QgsVectorDataProvider::fieldNameIndex( const QString& fieldName ) const
+ {
+   const QgsFields &theFields = fields();
+@@ -225,6 +224,12 @@ int QgsVectorDataProvider::fieldNameIndex( const QString& fieldName ) const
+   return -1;
+ }
+ 
++QString QgsVectorDataProvider::idFromFid( const int fid ) const
++{
++  Q_UNUSED( fid );
++  return "";
++}
++
+ QMap<QString, int> QgsVectorDataProvider::fieldNameMap() const
+ {
+   QMap<QString, int> resultMap;
+diff --git a/src/core/qgsvectordataprovider.h b/src/core/qgsvectordataprovider.h
+index 23f0ca8..b17a8c8 100644
+--- a/src/core/qgsvectordataprovider.h
++++ b/src/core/qgsvectordataprovider.h
+@@ -288,6 +288,11 @@ class CORE_EXPORT QgsVectorDataProvider : public QgsDataProvider
+     int fieldNameIndex( const QString& fieldName ) const;
+ 
+     /**
++     * Returns feature datasource id from FID
++     */
++    virtual QString idFromFid( const int fid ) const;
++
++    /**
+      * Return a map where the key is the name of the field and the value is its index
+      */
+     QMap<QString, int> fieldNameMap() const;
+diff --git a/src/providers/wfs/qgswfsprovider.cpp b/src/providers/wfs/qgswfsprovider.cpp
+index d6e71b3..805736d 100644
+--- a/src/providers/wfs/qgswfsprovider.cpp
++++ b/src/providers/wfs/qgswfsprovider.cpp
+@@ -1597,6 +1597,12 @@ void QgsWFSProvider::appendSupportedOperations( const QDomElement& operationsEle
+   }
+ }
+ 
++QString QgsWFSProvider::idFromFid( const int fid ) const
++{
++  QMap< QgsFeatureId, QString >::const_iterator fidIt = mIdMap.find( fid );
++  return fidIt.value();
++}
++
+ #if 0
+ //initialization for getRenderedOnly option
+ //(formerly "Only request features overlapping the current view extent")
+diff --git a/src/providers/wfs/qgswfsprovider.h b/src/providers/wfs/qgswfsprovider.h
+index 988bf5a..df99bbd 100644
+--- a/src/providers/wfs/qgswfsprovider.h
++++ b/src/providers/wfs/qgswfsprovider.h
+@@ -131,6 +131,11 @@ class QgsWFSProvider : public QgsVectorDataProvider
+      */
+     virtual bool changeAttributeValues( const QgsChangedAttributesMap &attr_map ) override;
+ 
++    /**
++     * Returns feature datasource id from FID
++     */
++    virtual QString idFromFid( const int fid ) const;
++
+     /**Collects information about the field types. Is called internally from QgsWFSProvider ctor. The method delegates the work to request specific ones and gives back the name of the geometry attribute and the thematic attributes with their types*/
+     int describeFeatureType( const QString& uri, QString& geometryAttribute,
+                              QgsFields& fields, QGis::WkbType& geomType );

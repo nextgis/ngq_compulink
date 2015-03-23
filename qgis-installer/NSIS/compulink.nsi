@@ -18,7 +18,7 @@
 !define PROGRAM_UNINSTALL_FILE_NAME "Uninstall-NextGIS_QGIS_Compulink-${PROGRAM_VERSION}"
 !define PROGRAM_UNINSTALL_LNK_NAME "Удалить ${PROGRAM_RUN_LNK_NAME} (${PROGRAM_VERSION})"
 
-#!define DEFAULT_PROJECT ""
+!define DEFAULT_PROJECT "..\project_default.qgs"
 
 !define PROGRAM_RUN_LNK_ICO_PATH "..\src\files-diff\src\app\qgis.ico"
 !define PROGRAM_RUN_LNK_ICO_FILENAME "qgis.ico"
