@@ -152,6 +152,6 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             return
 
         if self._iface.mapCanvas().hasCrsTransformEnabled():
-            layer_extent = self._iface.mapCanvas().layerExtentToOutputExtent(layer, layer_extent)
+            layer_extent = self._iface.mapCanvas().mapRenderer().layerExtentToOutputExtent(layer, layer_extent)
 
         summary_extent.combineExtentWith(layer_extent)
