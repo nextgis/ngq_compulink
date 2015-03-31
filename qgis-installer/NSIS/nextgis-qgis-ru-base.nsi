@@ -200,9 +200,9 @@ Section "-DONE"
         "" \
         "Запустить ${PROGRAM_RUN_LNK_NAME}"
 
-    Delete "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\${PROGRAM_RUN_LNK_NAME}.lnk"
+    Delete "$SMPROGRAMS\${PROGRAM_NAME}\${PROGRAM_RUN_LNK_NAME}.lnk"
     CreateShortCut \
-        "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\${PROGRAM_RUN_LNK_NAME}.lnk" \
+        "$SMPROGRAMS\${PROGRAM_NAME}\${PROGRAM_RUN_LNK_NAME}.lnk" \
         "$INSTALL_DIR\bin\nircmd.exe" 'exec hide "$INSTALL_DIR\bin\${SHORTNAME}.bat" "$INSTALL_DIR\defalut_options"' \
         "$INSTALL_DIR\images\${PROGRAM_RUN_LNK_ICO_FILENAME}" \
         "" \
@@ -210,9 +210,9 @@ Section "-DONE"
         "" \
         "Запустить ${PROGRAM_RUN_LNK_NAME}"
         
-    Delete "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\Установить настройки по-умолчанию.lnk"
+    Delete "$SMPROGRAMS\${PROGRAM_NAME}\Установить настройки по-умолчанию.lnk"
     CreateShortCut \
-        "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\Установить настройки по-умолчанию.lnk" \
+        "$SMPROGRAMS\${PROGRAM_NAME}\Установить настройки по-умолчанию.lnk" \
         "$INSTALL_DIR\bin\nircmd.exe" 'exec hide "$INSTALL_DIR\bin\${SHORTNAME}_preruner.bat"' \
         "$INSTALL_DIR\images\${PROGRAM_RUN_LNK_ICO_FILENAME}" \
         "" \
@@ -220,9 +220,9 @@ Section "-DONE"
         "" \
         "Установить настройки по-умолчанию"
         
-    Delete "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\${PROGRAM_UNINSTALL_LNK_NAME}.lnk"
+    Delete "$SMPROGRAMS\${PROGRAM_NAME}\${PROGRAM_UNINSTALL_LNK_NAME}.lnk"
     CreateShortCut \
-        "$SMPROGRAMS\${PROGRAM_NAME_FOR_START_MENU}\${PROGRAM_UNINSTALL_LNK_NAME}.lnk" \
+        "$SMPROGRAMS\${PROGRAM_NAME}\${PROGRAM_UNINSTALL_LNK_NAME}.lnk" \
         "$INSTALL_DIR\${PROGRAM_UNINSTALL_FILE_NAME}.exe" \
         "" \
         "$INSTALL_DIR\${PROGRAM_UNINSTALL_FILE_NAME}.exe" \
