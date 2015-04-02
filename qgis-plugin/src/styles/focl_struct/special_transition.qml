@@ -12,7 +12,7 @@
       </widgetv2config>
     </edittype>
     <edittype widgetv2type="TextEdit" name="description">
-      <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+      <widgetv2config IsMultiline="1" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
     </edittype>
   </edittypes>
   <renderer-v2 symbollevels="0" type="singleSymbol">
