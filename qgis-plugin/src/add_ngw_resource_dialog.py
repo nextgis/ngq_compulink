@@ -120,6 +120,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             parent_group = toc_root.insertGroup(0, parent_resource.common.display_name)
 
         layers_group = parent_group.insertGroup(0, ngw_resource.common.display_name)
+        #layers_group.setExpanded(False)
 
         styles_path = path.join(path.dirname(__file__), 'styles/', ngw_resource.common.cls + '/')
 
@@ -132,7 +133,8 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             self._summ_extent(summary_extent, qgs_wfs_layer)
 
             QgsMapLayerRegistry.instance().addMapLayer(qgs_wfs_layer, False)
-            layers_group.insertLayer(0, qgs_wfs_layer)
+            toc_layer = layers_group.insertLayer(0, qgs_wfs_layer)
+            toc_layer.setExpanded(False)
 
             layer_style_path = path.join(styles_path, wfs_layer.keyname + '.qml')
             if path.isfile(layer_style_path):
