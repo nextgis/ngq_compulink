@@ -43,11 +43,15 @@ class QNGWCompulinkResourceItem(QNGWResourceItem):
         self._children = []
         for resource_child in resource_children:
             if resource_child.common.cls in [
-                NGWGroupResource.type_id,
                 NGWFoclStruct.type_id,
                 NGWFoclProject.type_id,
                 NGWSituationPlan.type_id,
             ]:
+                self._children.append(QNGWCompulinkResourceItem(resource_child, self))
+
+            # дополнительная проверка для директорий, для отсеивания директории со справочником
+            if resource_child.common.cls == NGWGroupResource.type_id and \
+               resource_child.common.keyname != 'dictionary_group':
                 self._children.append(QNGWCompulinkResourceItem(resource_child, self))
 
         #Сортировка по имени
