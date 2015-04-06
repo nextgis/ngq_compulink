@@ -50,12 +50,16 @@
       <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'ground'" key="{4a0c0022-b949-407b-a6f0-9dfdebc5a530}" symbol="0" label="В грунте"/>
       <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'air_link'" key="{d048503d-fe12-47c4-9ad8-b3517458bacf}" symbol="1" label="По ВЛС"/>
       <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'transmission_towers'" key="{c744a66a-0307-408e-832a-9691c1bf9e8b}" symbol="2" label="По ВЛ"/>
-      <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'canalization'" key="{3399b476-def9-4361-87dc-9e8684b5a1e1}" symbol="3" label="В кабельной канализации"/>
-      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'ground'" key="{7e238867-94c9-4b8b-980c-de08f77b4329}" symbol="4" label="В грунте"/>
-      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'air_link'" key="{08a21448-a83e-4e60-ac83-4fe5615b8739}" symbol="5" label="По ВЛС"/>
-      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'transmission_towers'" key="{9d84a9e4-fcf3-41b6-884c-5d7223fa9ffb}" symbol="6" label="По ВЛ"/>
-      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'canalization'" key="{92a263eb-8649-4b9f-aeee-aef3ffd2b951}" symbol="7" label="В кабельной канализации"/>
-      <rule filter="&quot;laying_method&quot; IS NULL OR  &quot;status_built&quot; IS NULL " key="{78c47413-07e6-4de4-b0aa-73885fa2a9a3}" symbol="8" label="Не определен"/>
+      <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'canalization'" key="{1698de06-36db-4601-a206-4652754cb196}" symbol="3" label="В кабельной канализации"/>
+      <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'sewer'" key="{c15c2c93-3ceb-4f1a-8040-0f510daa2ca8}" symbol="4" label="В коллекторе"/>
+      <rule filter="&quot;status_built&quot;  = 'project' and &quot;laying_method&quot;  = 'building'" key="{3399b476-def9-4361-87dc-9e8684b5a1e1}" symbol="5" label="В здании"/>
+      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'ground'" key="{7e238867-94c9-4b8b-980c-de08f77b4329}" symbol="6" label="В грунте"/>
+      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'air_link'" key="{08a21448-a83e-4e60-ac83-4fe5615b8739}" symbol="7" label="По ВЛС"/>
+      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'transmission_towers'" key="{9d84a9e4-fcf3-41b6-884c-5d7223fa9ffb}" symbol="8" label="По ВЛ"/>
+      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'canalization'" key="{e3bc23a4-474c-495e-a78a-7c0d38123f29}" symbol="9" label="В кабельной канализации"/>
+      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'sewer'" key="{53fb13e4-eccb-407b-a8ac-1c1918fd294a}" symbol="10" label="В коллекторе"/>
+      <rule filter="&quot;status_built&quot;  = 'built' and &quot;laying_method&quot;  = 'building'" key="{92a263eb-8649-4b9f-aeee-aef3ffd2b951}" symbol="11" label="В здании"/>
+      <rule filter="&quot;laying_method&quot; IS NULL OR  &quot;status_built&quot; IS NULL " key="{78c47413-07e6-4de4-b0aa-73885fa2a9a3}" symbol="12" label="Не определен"/>
     </rules>
     <symbols>
       <symbol alpha="1" type="line" name="0">
@@ -94,6 +98,126 @@
           <prop k="offset_unit" v="MM"/>
           <prop k="use_custom_dash" v="0"/>
           <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="10">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="134,245,29,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="2.46"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="118,0,236,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="11">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="134,245,29,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="2.46"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="29,66,201,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+      </symbol>
+      <symbol alpha="1" type="line" name="12">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="MarkerLine" locked="0">
+          <prop k="interval" v="15"/>
+          <prop k="interval_map_unit_scale" v="0,0"/>
+          <prop k="interval_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_along_line" v="0"/>
+          <prop k="offset_along_line_map_unit_scale" v="0,0"/>
+          <prop k="offset_along_line_unit" v="MM"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="placement" v="interval"/>
+          <prop k="rotate" v="1"/>
+          <symbol alpha="1" type="marker" name="@12@1">
+            <layer pass="0" class="FontMarker" locked="0">
+              <prop k="angle" v="0"/>
+              <prop k="chr" v="?"/>
+              <prop k="color" v="255,0,0,255"/>
+              <prop k="font" v="DejaVu Sans"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="size" v="6"/>
+              <prop k="size_map_unit_scale" v="0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+            </layer>
+          </symbol>
         </layer>
       </symbol>
       <symbol alpha="1" type="line" name="2">
@@ -142,25 +266,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="134,245,29,255"/>
-          <prop k="line_style" v="solid"/>
-          <prop k="line_width" v="2.46"/>
-          <prop k="line_width_unit" v="MM"/>
-          <prop k="offset" v="0"/>
-          <prop k="offset_map_unit_scale" v="0,0"/>
-          <prop k="offset_unit" v="MM"/>
-          <prop k="use_custom_dash" v="0"/>
-          <prop k="width_map_unit_scale" v="0,0"/>
-        </layer>
-        <layer pass="0" class="SimpleLine" locked="0">
-          <prop k="capstyle" v="square"/>
-          <prop k="customdash" v="5;2"/>
-          <prop k="customdash_map_unit_scale" v="0,0"/>
-          <prop k="customdash_unit" v="MM"/>
-          <prop k="draw_inside_polygon" v="0"/>
-          <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="156,121,0,255"/>
-          <prop k="line_style" v="solid"/>
+          <prop k="line_color" v="118,0,236,255"/>
+          <prop k="line_style" v="dash"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="0"/>
@@ -178,25 +285,8 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="134,245,29,255"/>
-          <prop k="line_style" v="solid"/>
-          <prop k="line_width" v="2.46"/>
-          <prop k="line_width_unit" v="MM"/>
-          <prop k="offset" v="0"/>
-          <prop k="offset_map_unit_scale" v="0,0"/>
-          <prop k="offset_unit" v="MM"/>
-          <prop k="use_custom_dash" v="0"/>
-          <prop k="width_map_unit_scale" v="0,0"/>
-        </layer>
-        <layer pass="0" class="SimpleLine" locked="0">
-          <prop k="capstyle" v="square"/>
-          <prop k="customdash" v="5;2"/>
-          <prop k="customdash_map_unit_scale" v="0,0"/>
-          <prop k="customdash_unit" v="MM"/>
-          <prop k="draw_inside_polygon" v="0"/>
-          <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="90,219,238,223"/>
-          <prop k="line_style" v="solid"/>
+          <prop k="line_color" v="29,66,201,255"/>
+          <prop k="line_style" v="dash"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="0"/>
@@ -231,7 +321,7 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="0,0,0,255"/>
+          <prop k="line_color" v="156,121,0,255"/>
           <prop k="line_style" v="solid"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
@@ -267,7 +357,7 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
-          <prop k="line_color" v="255,139,0,255"/>
+          <prop k="line_color" v="90,219,238,223"/>
           <prop k="line_style" v="solid"/>
           <prop k="line_width" v="0.86"/>
           <prop k="line_width_unit" v="MM"/>
@@ -286,6 +376,23 @@
           <prop k="customdash_unit" v="MM"/>
           <prop k="draw_inside_polygon" v="0"/>
           <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="134,245,29,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="2.46"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
           <prop k="line_color" v="0,0,0,255"/>
           <prop k="line_style" v="solid"/>
           <prop k="line_width" v="0.86"/>
@@ -296,34 +403,41 @@
           <prop k="use_custom_dash" v="0"/>
           <prop k="width_map_unit_scale" v="0,0"/>
         </layer>
-        <layer pass="0" class="MarkerLine" locked="0">
-          <prop k="interval" v="15"/>
-          <prop k="interval_map_unit_scale" v="0,0"/>
-          <prop k="interval_unit" v="MM"/>
+      </symbol>
+      <symbol alpha="1" type="line" name="9">
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="134,245,29,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="2.46"/>
+          <prop k="line_width_unit" v="MM"/>
           <prop k="offset" v="0"/>
-          <prop k="offset_along_line" v="0"/>
-          <prop k="offset_along_line_map_unit_scale" v="0,0"/>
-          <prop k="offset_along_line_unit" v="MM"/>
           <prop k="offset_map_unit_scale" v="0,0"/>
           <prop k="offset_unit" v="MM"/>
-          <prop k="placement" v="interval"/>
-          <prop k="rotate" v="1"/>
-          <symbol alpha="1" type="marker" name="@8@1">
-            <layer pass="0" class="FontMarker" locked="0">
-              <prop k="angle" v="0"/>
-              <prop k="chr" v="?"/>
-              <prop k="color" v="255,0,0,255"/>
-              <prop k="font" v="DejaVu Sans"/>
-              <prop k="horizontal_anchor_point" v="1"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="size" v="6"/>
-              <prop k="size_map_unit_scale" v="0,0"/>
-              <prop k="size_unit" v="MM"/>
-              <prop k="vertical_anchor_point" v="1"/>
-            </layer>
-          </symbol>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
+        </layer>
+        <layer pass="0" class="SimpleLine" locked="0">
+          <prop k="capstyle" v="square"/>
+          <prop k="customdash" v="5;2"/>
+          <prop k="customdash_map_unit_scale" v="0,0"/>
+          <prop k="customdash_unit" v="MM"/>
+          <prop k="draw_inside_polygon" v="0"/>
+          <prop k="joinstyle" v="bevel"/>
+          <prop k="line_color" v="255,139,0,255"/>
+          <prop k="line_style" v="solid"/>
+          <prop k="line_width" v="0.86"/>
+          <prop k="line_width_unit" v="MM"/>
+          <prop k="offset" v="0"/>
+          <prop k="offset_map_unit_scale" v="0,0"/>
+          <prop k="offset_unit" v="MM"/>
+          <prop k="use_custom_dash" v="0"/>
+          <prop k="width_map_unit_scale" v="0,0"/>
         </layer>
       </symbol>
     </symbols>
