@@ -8,7 +8,7 @@
       <widgetv2config AllowNull="0" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="100"/>
     </edittype>
     <edittype widgetv2type="Range" name="length">
-      <widgetv2config AllowNull="0" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="10000"/>
+      <widgetv2config AllowNull="0" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="100000"/>
     </edittype>
     <edittype widgetv2type="ValueMap" name="laying_method">
       <widgetv2config fieldEditable="1" labelOnTop="0">
@@ -43,6 +43,9 @@
     </edittype>
     <edittype widgetv2type="TextEdit" name="description">
       <widgetv2config IsMultiline="1" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+    </edittype>
+    <edittype widgetv2type="Range" name="length_direct">
+      <widgetv2config AllowNull="0" fieldEditable="1" Step="1" Style="SpinBox" labelOnTop="0" Min="0" Max="100000"/>
     </edittype>
   </edittypes>
   <renderer-v2 symbollevels="0" type="RuleRenderer">
@@ -614,13 +617,14 @@
   <editforminit/>
   <featformsuppress>0</featformsuppress>
   <annotationform></annotationform>
-  <editorlayout>generatedlayout</editorlayout>
+  <editorlayout>tablayout</editorlayout>
   <aliases>
     <alias field="description" index="9" name="Описание"/>
     <alias field="fibers" index="1" name="Количество оптических волокон"/>
     <alias field="has_special_transition" index="4" name="Наличие ГНБ/спецперехода"/>
     <alias field="laying_method" index="3" name="Способ прокладки"/>
-    <alias field="length" index="2" name="Длина"/>
+    <alias field="length" index="2" name="Длина кабеля, м"/>
+    <alias field="length_direct" index="10" name="Длина трассы, м"/>
     <alias field="name" index="0" name="Наименование"/>
     <alias field="status_built" index="5" name="Статус строительства"/>
     <alias field="status_built_ch" index="6" name="Дата изменения статуса"/>
@@ -629,5 +633,18 @@
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
+  <attributeEditorForm>
+    <attributeEditorContainer name="Общее">
+      <attributeEditorField index="0" name="name"/>
+      <attributeEditorField index="1" name="fibers"/>
+      <attributeEditorField index="10" name="length_direct"/>
+      <attributeEditorField index="2" name="length"/>
+      <attributeEditorField index="3" name="laying_method"/>
+      <attributeEditorField index="4" name="has_special_transition"/>
+      <attributeEditorField index="5" name="status_built"/>
+      <attributeEditorField index="7" name="status_check"/>
+      <attributeEditorField index="9" name="description"/>
+    </attributeEditorContainer>
+  </attributeEditorForm>
   <attributeactions/>
 </qgis>
