@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Add NGW Resource</string>
+   <string>Add server layers</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
