@@ -1,0 +1,45 @@
+[general]
+name=QuickMapServices
+qgisMinimumVersion=2.4
+description=Collection of internet map services
+version=0.11
+author=NextGIS
+email=info@nextgis.com
+
+# End of mandatory metadata
+
+# Optional items:
+
+# Uncomment the following line and add your changelog:
+changelog= 0.11:
+        * Config files translation support added
+        * Russian translation for some config files appended
+      0.10:
+        * Refactor WMS provider
+        * Add NASA WMS layers
+      0.9:
+        * Fix #7 "Web" menu disapeared
+      0.8:
+        * Sort menu items in groups
+        * Thunderforest tile services
+        * Mapquest osm and aerial
+      0.7:
+        * TMS zmin and zmax params wsa added to the ini configs
+        * MapSurfer tile services was added
+        * OSM Veloroad Style tile services was added
+      0.6:
+        * Fix imports
+
+# Tags are comma separated with spaces allowed
+tags=service, internet, tms, wms
+
+homepage=
+tracker=https://github.com/nextgis/quickmapservices/issues
+repository=https://github.com/nextgis/quickmapservices
+icon=icons/mapservices.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+

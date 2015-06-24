@@ -1,0 +1,55 @@
+# Mandatory items:
+
+[general]
+name=RuGeocoder
+qgisMinimumVersion=2.0
+description=Geocode your csv files to shp (Russia only)
+version=0.4.1
+
+
+# Optional items:
+
+changelog: 0.4.1:
+        * Quick geocoding toolbar
+    0.4.0:
+        * Migrate to QGIS 2.x API
+    0.3.9:
+        * beta.openstreetmap.ru geocoder added
+        * Fix small bug
+    0.3.8:
+        * Fix bugs
+    0.3.7:
+        * Openstreetmap.ru geocoder added
+    0.3.6:
+        * Fix critical bugs with non-ascii paths
+    0.3.5:
+        * Fix critical bug
+        * Small improvements
+    0.3.4:
+        * Fix critical bug
+    0.3.3:
+        * 'Add additional fields' chkbox added
+        * More flexible settings for geocoding
+        * Fix small errors
+    0.3.2:
+        * 'Add layer to canvas' chkbox added
+        * Fixed forms sizes on Windows
+        * Added russian accept-language for OSM requests
+        * Only one opened plugin window now
+        * Plugin windows is fixed size now
+        * Separate region names for geocoders
+        * Fixed bug with main menu on unload
+    0.3.1:
+        * Russian translation added
+
+tags= Geocoding, Address, Yandex, Google, Nominatim
+homepage=https://github.com/yellow-sky/RuGeocoder
+tracker=https://github.com/yellow-sky/RuGeocoder/issues
+repository=https://github.com/yellow-sky/RuGeocoder
+icon=icon.png 
+experimental=False
+deprecated=False
+
+# Author contact information
+author=Nikulin Evgeniy
+email=nikulin.e at gmail

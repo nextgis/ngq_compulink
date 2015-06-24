@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BatchGeocodingDialog</class>
+ <widget class="QDialog" name="BatchGeocodingDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>436</width>
+    <height>392</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Batch geocoding</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="18" column="0" colspan="4">
+    <widget class="Line" name="line_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="3">
+    <widget class="QComboBox" name="cmbLayer"/>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="0" colspan="4">
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="1" colspan="3">
+    <widget class="QComboBox" name="cmbGeocoder"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QCheckBox" name="chkStreet">
+     <property name="text">
+      <string>Street:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1" colspan="3">
+    <widget class="QComboBox" name="cmbStreet">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1" colspan="3">
+    <widget class="QComboBox" name="cmbBuildingNum">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="3">
+    <widget class="QComboBox" name="cmbAddress"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="lblLayer">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="text">
+      <string>Layer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="3">
+    <widget class="QFrame" name="frmSettlement">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="rbSettlName">
+        <property name="text">
+         <string>Name</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="rbSettlField">
+        <property name="text">
+         <string>From field</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="cmbSettlField">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtSettlName"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QComboBox" name="cmbRegion">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="lblAddress">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Address:</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QCheckBox" name="chkSettlement">
+     <property name="text">
+      <string>Settlement:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QCheckBox" name="chkDistrict">
+     <property name="text">
+      <string>District:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="0" colspan="4">
+    <widget class="QWidget" name="bottomPanel" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QProgressBar" name="prgProcess">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRun">
+        <property name="text">
+         <string>Run</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="17" column="0">
+    <widget class="QLabel" name="lblGeocoder">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Geocoder:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="3">
+    <widget class="QFrame" name="frmDistrict">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="rbDisctrictName">
+        <property name="text">
+         <string>Name</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="rbDistrictField">
+        <property name="text">
+         <string>From field</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtDistrictName"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="cmbDistrictField">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QCheckBox" name="chkRegion">
+     <property name="text">
+      <string>Region:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="lblBuild">
+     <property name="text">
+      <string>Build. num:</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cmbLayer</tabstop>
+  <tabstop>cmbAddress</tabstop>
+  <tabstop>chkRegion</tabstop>
+  <tabstop>cmbRegion</tabstop>
+  <tabstop>chkDistrict</tabstop>
+  <tabstop>rbDisctrictName</tabstop>
+  <tabstop>txtDistrictName</tabstop>
+  <tabstop>rbDistrictField</tabstop>
+  <tabstop>cmbDistrictField</tabstop>
+  <tabstop>chkSettlement</tabstop>
+  <tabstop>rbSettlName</tabstop>
+  <tabstop>txtSettlName</tabstop>
+  <tabstop>rbSettlField</tabstop>
+  <tabstop>cmbSettlField</tabstop>
+  <tabstop>chkStreet</tabstop>
+  <tabstop>cmbStreet</tabstop>
+  <tabstop>cmbBuildingNum</tabstop>
+  <tabstop>cmbGeocoder</tabstop>
+  <tabstop>btnRun</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>rbSettlField</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cmbSettlField</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbSettlName</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>txtSettlName</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbDistrictField</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cmbDistrictField</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>112</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbDisctrictName</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>txtDistrictName</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>85</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkStreet</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cmbStreet</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkSettlement</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frmSettlement</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>196</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkDistrict</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frmDistrict</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkRegion</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cmbRegion</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>78</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkStreet</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cmbBuildingNum</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkStreet</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cmbAddress</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>50</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

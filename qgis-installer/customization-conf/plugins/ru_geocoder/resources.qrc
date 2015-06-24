@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/plugins/rugeocoderplugin" >
+        <file>icon.png</file>
+        <file>convert.png</file>
+    </qresource>
+</RCC>

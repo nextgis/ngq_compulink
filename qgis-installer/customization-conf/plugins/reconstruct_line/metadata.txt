@@ -1,0 +1,49 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=ReconstructLine
+qgisMinimumVersion=2.6
+description=QGIS tool to reconstruct linear features from points.
+about=QGIS tool to reconstruct linear features from points. Points can be unordered (mixed) time-wise, only spatial location of points is considered. This is NOT simple 'connect the dots as they are in the table' mechanism (for that - check Points2One plugin.
+version=0.5
+author=NextGIS
+
+email=info@nextgis.com
+
+# End of mandatory metadata
+
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
+changelog= 0.5:
+        * Update metadata
+    0.4:
+        * GUI Changes
+        * Fix small errors
+        * Rename plugin
+    0.3:
+        * Algorithm optimizations
+    0.2:
+        * Fix many bugs
+        * Improve algorithm
+
+# Tags are comma separated with spaces allowed
+tags=Vector Point Line Merge OTF
+
+homepage=https://github.com/nextgis/ReconstructLine
+tracker=https://github.com/nextgis/ReconstructLine/issues
+repository=https://github.com/nextgis/ReconstructLine
+category=Vector
+icon=save_line.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+

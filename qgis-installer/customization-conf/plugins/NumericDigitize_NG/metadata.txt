@@ -1,0 +1,42 @@
+; the next section is mandatory
+[general]
+; start of mandatory metadata
+name=NumericDigitize_NG
+qgisMinimumVersion=2.0
+description=Digitize with just the keyboard
+version=version Version 0.2.7
+author=Cédric Möri
+email=cmoe@geoing.ch
+; end of mandatory metadata
+
+; start of optional metadata
+
+; experimental flag
+experimental=false
+
+changelog=0.2.7
+  0.2.6 Processing reprojection error, universal separator character
+  0.2.5 Add tarnslation
+  0.2.4 Use wkbType for geometry identification
+  0.2.3 Change metadata
+  0.2.2 Support multipart geometries
+  0.2.1 Chengae by NextGIS (info@nextgis.ru)
+  Add the ability to explicitly choose crs of the input coordinates.
+  Add storing selected crs.
+  Add russian localization.
+  0.2.0
+  Ready for QGIS 2.0
+  fixed for use with QGIS > 1.8
+
+; tags are in comma separated value format, spaces are allowed
+tags=digitizing
+
+; these metadata can be empty
+; in a future version of the web application it will
+; be probably possible to create a project on redmine
+; if they are not filled
+homepage=https://github.com/nextgis/NumericDigitize_NG
+tracker=https://github.com/nextgis/NumericDigitize_NG
+repository=https://github.com/nextgis/NumericDigitize_NG
+icon=vector-create-keyboard.png
+
