@@ -43,4 +43,4 @@
     {"file": "isocteui_0.ttf", "name":"ISOCTEUR Italic (TrueType)"},
     {"file": "isocteur_0.ttf", "name":"ISOCTEUR (TrueType)"}
 ],
-"print_templates":"print-templates"}
+"print_templates":"ngq-print-templates"}
