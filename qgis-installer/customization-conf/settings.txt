@@ -5,7 +5,7 @@
 "ngq_icon_svg": "compulink.svg",
 "prog_name": "NextGIS QGIS Compulink",
 "installer_name":"NextGIS_QGIS_Compulink",
-"default_qgis_options_dir":"ngq_default_options",
+"default_qgis_options_dirs":{"DEFAULT": "ngq_default_options"},
 "def_project": "project_default.qgs",
 "ngq_plugins": [
     {"name": "identifyplus"},
