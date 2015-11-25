@@ -194,7 +194,7 @@ class CompulinkToolsPlugin:
         icon_path = self.plugin_dir + '/icon_list.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Add projects layers'),
+            text=self.tr(u'Add server layers'),
             callback=self.add_layers_from_ngw,
             parent=self.iface.mainWindow())
 

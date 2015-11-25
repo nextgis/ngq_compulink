@@ -25,7 +25,7 @@ import threading
 from PyQt4.QtCore import QObject, qDebug, Qt, QFile, QRectF, QPointF, QPoint, QTimer, QEventLoop
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QFont, QColor, QBrush
-from qgis.core import QgsPluginLayer, QgsCoordinateReferenceSystem, QgsPluginLayerType
+from qgis.core import QgsPluginLayer, QgsCoordinateReferenceSystem, QgsPluginLayerType, QgsImageOperation
 from qgis.gui import QgsMessageBar
 from ..plugin_settings import PluginSettings
 from ..qgis_settings import QGISSettings
@@ -48,6 +48,9 @@ class LayerDefaultSettings:
     TRANSPARENCY = 0
     BLEND_MODE = "SourceOver"
     SMOOTH_RENDER = True
+    GRAYSCALE_RENDER = False
+    BRIGTNESS = 0
+    CONTRAST = 1.0
 
 
 class TileLayer(QgsPluginLayer):
@@ -64,7 +67,6 @@ class TileLayer(QgsPluginLayer):
         self.iface = plugin.iface
         self.layerDef = layerDef
         self.creditVisibility = 1 if creditVisibility else 0
-        self.show_messages_in_bar = PluginSettings.show_messages_in_bar()
 
         # set custom properties
         self.setCustomProperty("title", layerDef.title)
@@ -77,7 +79,37 @@ class TileLayer(QgsPluginLayer):
             self.setCustomProperty("bbox", layerDef.bbox.toString())
         self.setCustomProperty("creditVisibility", self.creditVisibility)
 
+        # set standard/custom crs
         self.setCrs(self.CRS_3857)
+        try:
+            crs = None
+            if layerDef.epsg_crs_id is not None:
+                crs = QgsCoordinateReferenceSystem(layerDef.epsg_crs_id, QgsCoordinateReferenceSystem.EpsgCrsId)
+            if layerDef.postgis_crs_id is not None:
+                crs = QgsCoordinateReferenceSystem(layerDef.postgis_crs_id, QgsCoordinateReferenceSystem.PostgisCrsId)
+            if layerDef.custom_proj is not None:
+                # create form proj4 str
+                custom_crs = QgsCoordinateReferenceSystem()
+                custom_crs.createFromProj4(layerDef.custom_proj)
+                # try to search in db
+                searched = custom_crs.findMatchingProj()
+                if searched:
+                    crs = QgsCoordinateReferenceSystem(searched, QgsCoordinateReferenceSystem.InternalCrsId)
+                else:
+                    # create custom and use it
+                    custom_crs.saveAsUserCRS('quickmapservices %s' % layerDef.title)
+                    searched = custom_crs.findMatchingProj()
+                    if searched:
+                        crs = QgsCoordinateReferenceSystem(searched, QgsCoordinateReferenceSystem.InternalCrsId)
+                    else:
+                        crs = custom_crs
+
+            if crs:
+                self.setCrs(crs)
+        except:
+            msg = self.tr("Custom crs can't be set for layer {0}!").format(layerDef.title)
+            self.showBarMessage(msg, QgsMessageBar.WARNING, 4)
+
         if layerDef.bbox:
             self.setExtent(BoundingBox.degreesToMercatorMeters(layerDef.bbox).toQgsRectangle())
         else:
@@ -89,6 +121,9 @@ class TileLayer(QgsPluginLayer):
         self.setTransparency(LayerDefaultSettings.TRANSPARENCY)
         self.setBlendModeByName(LayerDefaultSettings.BLEND_MODE)
         self.setSmoothRender(LayerDefaultSettings.SMOOTH_RENDER)
+        self.setGrayscaleRender(LayerDefaultSettings.GRAYSCALE_RENDER)
+        self.setBrigthness(LayerDefaultSettings.BRIGTNESS)
+        self.setContrast(LayerDefaultSettings.CONTRAST)
 
         # downloader
         self.downloader = Downloader(self)
@@ -125,10 +160,20 @@ class TileLayer(QgsPluginLayer):
         self.creditVisibility = visible
         self.setCustomProperty("creditVisibility", 1 if visible else 0)
 
-    def draw(self, renderContext):
+    def setGrayscaleRender(self, isGrayscale):
+        self.grayscaleRender = isGrayscale
+        self.setCustomProperty("grayscaleRender", 1 if isGrayscale else 0)
 
-        #import pydevd
-        #pydevd.settrace('localhost', port=9921, stdoutToServer=True, stderrToServer=True, suspend=False)
+    def setBrigthness(self, brigthness):
+        self.brigthness = brigthness
+        self.setCustomProperty("brigthness", brigthness)
+
+    def setContrast(self, contrast):
+        self.contrast = contrast
+        self.setCustomProperty("contrast", contrast)
+
+
+    def draw(self, renderContext):
 
         self.renderContext = renderContext
         extent = renderContext.extent()
@@ -153,11 +198,10 @@ class TileLayer(QgsPluginLayer):
 
         # zoom limit
         if zoom < self.layerDef.zmin:
-            if self.show_messages_in_bar:
-                msg = self.tr("Current zoom level ({0}) is smaller than zmin ({1}): {2}").format(zoom,
-                                                                                                 self.layerDef.zmin,
-                                                                                                 self.layerDef.title)
-                self.showBarMessage(msg, QgsMessageBar.INFO, 2)
+            msg = self.tr("Current zoom level ({0}) is smaller than zmin ({1}): {2}").format(zoom,
+                                                                                             self.layerDef.zmin,
+                                                                                             self.layerDef.title)
+            self.showBarMessage(msg, QgsMessageBar.INFO, 2)
             return True
 
         while True:
@@ -195,15 +239,6 @@ class TileLayer(QgsPluginLayer):
 
             # zoom level has been determined
             break
-
-
-        # frame isn't drawn not in web mercator
-        isWebMercator = self.isProjectCrsWebMercator()
-        if not isWebMercator and self.layerDef.serviceUrl[0] == ":":
-            if "frame" in self.layerDef.serviceUrl:  # or "number" in self.layerDef.serviceUrl:
-                msg = self.tr("Frame layer is drawn only in EPSG:3857")
-                self.showBarMessage(msg, QgsMessageBar.INFO, 2)
-                return True
 
         self.logT("TileLayer.draw: {0} {1} {2} {3} {4}".format(zoom, ulx, uly, lrx, lry))
 
@@ -270,7 +305,7 @@ class TileLayer(QgsPluginLayer):
                 painter.setRenderHint(QPainter.SmoothPixmapTransform)
 
             # draw tiles
-            if isWebMercator:
+            if not renderContext.coordinateTransform():
                 # no need to reproject tiles
                 self.drawTiles(renderContext, self.tiles)
                 # self.drawTilesDirectly(renderContext, self.tiles)
@@ -300,12 +335,6 @@ class TileLayer(QgsPluginLayer):
                 painter.fillRect(bgRect, QColor(240, 240, 240, 150))  # 197, 234, 243, 150))
                 painter.drawText(rect, Qt.AlignBottom | Qt.AlignRight, self.layerDef.credit)
 
-        if 0:  # debug_mode:
-            # draw plugin icon
-            image = QImage(os.path.join(os.path.dirname(QFile.decodeName(__file__)), "icon_old.png"))
-            painter.drawImage(5, 5, image)
-            self.logT("TileLayer.draw() ends")
-
         # restore painter state
         painter.restore()
 
@@ -317,6 +346,10 @@ class TileLayer(QgsPluginLayer):
     def drawTiles(self, renderContext, tiles, sdx=1.0, sdy=1.0):
         # create an image that has the same resolution as the tiles
         image = tiles.image()
+        if self.grayscaleRender:
+            QgsImageOperation.convertToGrayscale(image)
+        if self.brigthness != LayerDefaultSettings.BRIGTNESS or self.contrast != LayerDefaultSettings.CONTRAST:
+            QgsImageOperation.adjustBrightnessContrast(image, self.brigthness, self.contrast)
 
         # tile extent to pixel
         map2pixel = renderContext.mapToPixel()
@@ -344,6 +377,10 @@ class TileLayer(QgsPluginLayer):
 
         # create an image that has the same resolution as the tiles
         image = tiles.image()
+        if self.grayscaleRender:
+            QgsImageOperation.convertToGrayscale(image)
+        if self.brigthness != LayerDefaultSettings.BRIGTNESS or self.contrast != LayerDefaultSettings.CONTRAST:
+            QgsImageOperation.adjustBrightnessContrast(image, self.brigthness, self.contrast)
 
         # tile extent
         extent = tiles.extent()
@@ -559,6 +596,10 @@ class TileLayer(QgsPluginLayer):
         self.setBlendModeByName(self.customProperty("blendMode", LayerDefaultSettings.BLEND_MODE))
         self.setSmoothRender(int(self.customProperty("smoothRender", LayerDefaultSettings.SMOOTH_RENDER)))
         self.creditVisibility = int(self.customProperty("creditVisibility", 1))
+        self.setGrayscaleRender(int(self.customProperty("grascaleRender", LayerDefaultSettings.GRAYSCALE_RENDER)))
+        self.setBrigthness(int(self.customProperty("brigthness", LayerDefaultSettings.BRIGTNESS)))
+        self.setContrast(float(self.customProperty("contrast", LayerDefaultSettings.CONTRAST)))
+
         return True
 
     def writeXml(self, node, doc):
@@ -657,9 +698,10 @@ class TileLayer(QgsPluginLayer):
         self.iface.mainWindow().statusBar().showMessage(msg, timeout)
 
     def showBarMessage(self, text, level=QgsMessageBar.INFO, duration=0, title=None):
-        if title is None:
-            title = PluginSettings.product_name()
-        self.emit(SIGNAL("showBarMessage(QString, QString, int, int)"), title, text, level, duration)
+        if PluginSettings.show_messages_in_bar():
+            if title is None:
+                title = PluginSettings.product_name()
+            self.emit(SIGNAL("showBarMessage(QString, QString, int, int)"), title, text, level, duration)
 
     def showBarMessageSlot(self, title, text, level, duration):
         self.iface.messageBar().pushMessage(title, text, level, duration)
@@ -698,4 +740,7 @@ class TileLayerType(QgsPluginLayerType):
         layer.setBlendModeByName(dialog.ui.comboBox_BlendingMode.currentText())
         layer.setSmoothRender(dialog.ui.checkBox_SmoothRender.isChecked())
         layer.setCreditVisibility(dialog.ui.checkBox_CreditVisibility.isChecked())
+        layer.setGrayscaleRender(dialog.ui.checkBox_Grayscale.isChecked())
+        layer.setBrigthness(dialog.ui.spinBox_Brightness.value())
+        layer.setContrast(dialog.ui.doubleSpinBox_Contrast.value())
         layer.emit(SIGNAL("repaintRequested()"))
