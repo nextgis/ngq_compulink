@@ -43,6 +43,7 @@ from ngw_compulink.ngw_focl_struct import NGWFoclStruct
 from ngw_compulink.ngw_situation_plan import NGWSituationPlan
 from ngw_compulink.ngw_focl_proj import NGWFoclProject
 from ngw_compulink.qt_compulink_resource_model import QNGWCompulinkResourceItem
+from .utils import Utils
 
 
 FORM_CLASS, _ = uic.loadUiType(path.join(
@@ -56,6 +57,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
         self.setWindowIcon(QIcon(path.dirname(__file__) + '/icon_list.png'))
         self._iface = iface
 
+        self._dicts = Utils.get_dicts()
 
         #model
         self._root_item = QNGWCompulinkResourceItem(ngw_root_resource, None)
@@ -148,6 +150,7 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             else:
                 message = self.tr('Style for layer "%s" (%s) not found!') % (wfs_layer.display_name, wfs_layer.keyname)
                 QgsMessageLog.logMessage(message, level=QgsMessageLog.WARNING)
+            self.update_dicts(qgs_wfs_layer)
 
     def _summ_extent(self, summary_extent, layer):
         layer_extent = layer.extent()
@@ -163,3 +166,11 @@ class AddNgwResourceDialog(QDialog, FORM_CLASS):
             layer_extent = self._iface.mapCanvas().mapRenderer().layerExtentToOutputExtent(layer, layer_extent)
 
         summary_extent.combineExtentWith(layer_extent)
+
+    def update_dicts(self, lyr):
+        fields = [f for f in lyr.pendingFields()]
+        for i in range(0, len(fields)):
+            field = fields[i]
+            if field.name() in self._dicts.keys():
+                lyr.setEditorWidgetV2(i, 'ValueMap')
+                lyr.setEditorWidgetV2Config(i, self._dicts[field.name()])
