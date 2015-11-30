@@ -125,7 +125,7 @@ class TileServiceInfo:
     TSIZE1 = 20037508.342789244
 
     def __init__(self, title, credit, serviceUrl, yOriginTop=1, zmin=TileDefaultSettings.ZMIN,
-                 zmax=TileDefaultSettings.ZMAX, bbox=None):
+                 zmax=TileDefaultSettings.ZMAX, bbox=None, epsg_crs_id=None, postgis_crs_id=None, custom_proj=None):
         self.title = title
         self.credit = credit
         self.serviceUrl = serviceUrl
@@ -133,11 +133,29 @@ class TileServiceInfo:
         self.zmin = max(zmin, 0)
         self.zmax = zmax
         self.bbox = bbox
-
+        self.epsg_crs_id = epsg_crs_id
+        self.postgis_crs_id = postgis_crs_id
+        self.custom_proj = custom_proj
 
     def tileUrl(self, zoom, x, y):
         if not self.yOriginTop:
             y = (2 ** zoom - 1) - y
+        # Added the form to obtain the quadkey and remplace to use.
+        # With the following change using the quadkey allowed, take the variable {q} to represent quadkey field.
+        # Source and credits of procedure https://github.com/buckheroux/QuadKey/blob/master/quadkey/tile_system.py
+        # Adapting code Nelson Ugalde Araya nugaldea@gmail.com
+        if '{q}' in self.serviceUrl:
+            quadkey = ''
+            for i in xrange(zoom):
+                bit = zoom - i
+                digit = ord('0')
+                mask = 1 << (bit - 1)  # if (bit - 1) > 0 else 1 >> (bit - 1)
+                if (x & mask) is not 0:
+                    digit += 1
+                if (y & mask) is not 0:
+                    digit += 2
+                quadkey += chr(digit)
+            return self.serviceUrl.replace("{q}", str(quadkey))
 
         return self.serviceUrl.replace("{z}", str(zoom)).replace("{x}", str(x)).replace("{y}", str(y))
 

@@ -26,15 +26,18 @@ from ConfigParser import ConfigParser
 from PyQt4.QtCore import QCoreApplication
 from PyQt4.QtGui import QMenu, QIcon
 from qgis.core import QgsMessageLog
+from config_reader_helper import ConfigReaderHelper
+import extra_sources
 
 CURR_PATH = os.path.dirname(__file__)
 GROUP_PATHS = [
-    os.path.join(CURR_PATH, 'groups'),
-    os.path.join(CURR_PATH, 'groups_contrib'),
+    os.path.join(CURR_PATH, extra_sources.GROUPS_DIR_NAME),
+    os.path.join(extra_sources.CONTRIBUTE_DIR_PATH, extra_sources.GROUPS_DIR_NAME),
+    os.path.join(extra_sources.USER_DIR_PATH, extra_sources.GROUPS_DIR_NAME),
 ]
 
 
-class DsGroupsList():
+class DsGroupsList:
 
     def __init__(self, locale, custom_translator):
         self.locale = locale  # for translation
@@ -57,7 +60,8 @@ class DsGroupsList():
             #read config
             group_id = parser.get('general', 'id')
             group_alias = parser.get('ui', 'alias')
-            group_icon_path = os.path.join(root, parser.get('ui', 'icon'))
+            icon_file = ConfigReaderHelper.try_read_config(parser, 'ui', 'icon')
+            group_icon_path = os.path.join(root, icon_file) if icon_file else None
             #try read translations
             posible_trans = parser.items('ui')
             for key, val in posible_trans:

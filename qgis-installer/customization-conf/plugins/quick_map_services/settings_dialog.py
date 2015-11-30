@@ -24,44 +24,64 @@
 import os
 
 from PyQt4 import QtGui, uic
+from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QMessageBox, QCursor
+import sys
+from qgis.core import QgsApplication
+from extra_sources import ExtraSources
 from plugin_settings import PluginSettings
+from qgis_settings import QGISSettings
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'settings_dialog_base.ui'))
 
 
 class SettingsDialog(QtGui.QDialog, FORM_CLASS):
+
     def __init__(self, parent=None):
         """Constructor."""
         super(SettingsDialog, self).__init__(parent)
         self.setupUi(self)
-
-        self.fill_common_page()
-        self.fill_tiled_lyr_page()
-        self.fill_contrib_pack_page()
+        # init form
+        self.fill_pages()
+        # signals
         self.btnGetContribPack.clicked.connect(self.get_contrib)
         self.accepted.connect(self.save_settings)
 
-    def fill_common_page(self):
+    def fill_pages(self):
+        # common
         self.chkMoveToLayersMenu.setChecked(PluginSettings.move_to_layers_menu())
         self.chkEnableOTF3857.setChecked(PluginSettings.enable_otf_3857())
         self.chkShowMessagesInBar.setChecked(PluginSettings.show_messages_in_bar())
-
-    def fill_tiled_lyr_page(self):
+        # tiled layers
         self.spnConnCount.setValue(PluginSettings.default_tile_layer_conn_count())
-
-    def fill_contrib_pack_page(self):
-        pass
-
-    def get_contrib(self):
-        pass
+        self.spnCacheExp.setValue(QGISSettings.get_default_tile_expiry())
+        self.spnNetworkTimeout.setValue(QGISSettings.get_default_network_timeout())
+        # contrib pack
 
     def save_settings(self):
         # common
-        PluginSettings.set_move_to_layers_menu(self.chkMoveToLayersMenu.checked())
-        PluginSettings.set_enable_otf_3857(self.chkEnableOTF3857.checked())
-        PluginSettings.set_show_messages_in_bar(self.chkShowMessagesInBar.checked())
-
-        #tiled layers
+        PluginSettings.set_move_to_layers_menu(self.chkMoveToLayersMenu.isChecked())
+        PluginSettings.set_enable_otf_3857(self.chkEnableOTF3857.isChecked())
+        PluginSettings.set_show_messages_in_bar(self.chkShowMessagesInBar.isChecked())
+        # tiled layers
         PluginSettings.set_default_tile_layer_conn_count(self.spnConnCount.value())
+        QGISSettings.set_default_tile_expiry(self.spnCacheExp.value())
+        QGISSettings.set_default_network_timeout(self.spnNetworkTimeout.value())
+        # contrib pack
 
+    def apply_settings(self):
+        pass
+
+    def get_contrib(self):
+        QgsApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
+
+        try:
+            ExtraSources().load_contrib_pack()
+            QgsApplication.restoreOverrideCursor()
+            info_message = self.tr('Last version of contrib pack was downloaded!')
+            QMessageBox.information(self, PluginSettings.product_name(), info_message)
+        except:
+            QgsApplication.restoreOverrideCursor()
+            error_message = self.tr('Error on getting contrib pack: %s %s') % (sys.exc_type, sys.exc_value)
+            QMessageBox.critical(self, PluginSettings.product_name(), error_message)
