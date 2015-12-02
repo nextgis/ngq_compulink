@@ -217,8 +217,8 @@ class CompulinkToolsPlugin:
             self.iface.removeToolBarIcon(action)
 
     def add_layers_from_ngw(self):
-        import pydevd
-        pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True, suspend=False)
+        #import pydevd
+        #pydevd.settrace('localhost', port=5566, stdoutToServer=True, stderrToServer=True, suspend=False)
 
         conn_name = PluginSettings.get_selected_ngw_connection_name()
         if not conn_name:
